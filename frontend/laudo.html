@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Novo Laudo</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ==========================
+       ESTILOS BÁSICOS
+    =========================== */
+    .conteudo { display: none; }
+    .active { background-color: #ddd; font-weight: bold; }
+    .campo { display: flex; gap: 5px; margin-bottom: 8px; align-items: center; }
+    .linha { margin: 20px 0; border: 0; border-top: 1px solid #ccc; }
+    label { font-weight: bold; display: block; margin-top: 10px; margin-bottom: 5px; color: #555; }
+    .endereco input, .local-trabalho input { margin-right: 5px; }
+    .salvar-area { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="voltar">⬅ Voltar</a>
+
+  <div class="main">
+    <h1 class="titulo">Novo Laudo</h1>
+
+    <div class="box">
+      <!--==========================
+             TABS
+      ============================-->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="trocarAba(event, 'periculosidade')">Periculosidade</button>
+        <button class="tab-btn" onclick="trocarAba(event, 'insalubridade')">Insalubridade</button>
+        <button class="tab-btn" onclick="trocarAba(event, 'periculosidade insalubridade')">Periculosidade/Insalubridade</button>
+      </div>
+
+      <!--==========================
+             PERICULOSIDADE
+      ============================-->
+      <div id="periculosidade" class="conteudo" style="display:block;">
+        <input type="text" placeholder="N° do Processo">
+        <div id="lista-reclamantes-peric">
+          <div class="campo">
+            <input type="text" placeholder="Reclamante">
+            <button type="button" onclick="adicionarReclamante('lista-reclamantes-peric')">+</button>
+            <button type="button" onclick="removerReclamante(this)">-</button>
+          </div>
+        </div>
+
+        <div id="lista-reclamadas-peric">
+          <div class="campo">
+            <input type="text" placeholder="Reclamada">
+            <button type="button" onclick="adicionarCampo('lista-reclamadas-peric')">+</button>
+            <button type="button" onclick="removerCampo(this)">-</button>
+          </div>
+        </div>
+
+        <hr class="linha">
+        <div id="container-peric"></div>
+        <div id="container-documentos-peric"></div>
+
+        <hr class="linha">
+        <div class="endereco">
+          <input type="text" placeholder="Rua">
+          <input type="text" placeholder="Número">
+          <input type="text" placeholder="Bairro">
+          <input type="text" placeholder="Cidade">
+        </div>
+
+        <hr class="linha">
+        <div class="local-trabalho">
+          <input type="text" placeholder="Local de Trabalho">
+          <input type="text" placeholder="Paredes">
+          <input type="text" placeholder="Pisos">
+          <input type="text" placeholder="Iluminação">
+          <input type="text" placeholder="Ventilação">
+        </div>
+
+        <hr class="linha">
+        <div>
+          <input type="text" placeholder="Data Perícia" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+          <input type="text" placeholder="Data Laudo" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+        </div>
+      </div>
+
+      <!--==========================
+             INSALUBRIDADE
+      ============================-->
+      <div id="insalubridade" class="conteudo">
+        <input type="text" placeholder="N° do Processo">
+        <div id="lista-reclamantes-insalub">
+          <div class="campo">
+            <input type="text" placeholder="Reclamante">
+            <button type="button" onclick="adicionarReclamante('lista-reclamantes-insalub')">+</button>
+            <button type="button" onclick="removerReclamante(this)">-</button>
+          </div>
+        </div>
+
+        <div id="lista-reclamadas-insalub">
+          <div class="campo">
+            <input type="text" placeholder="Reclamada">
+            <button type="button" onclick="adicionarCampo('lista-reclamadas-insalub')">+</button>
+            <button type="button" onclick="removerCampo(this)">-</button>
+          </div>
+        </div>
+
+        <hr class="linha">
+        <div id="container-insalub"></div>
+        <div id="container-documentos-insalub"></div>
+
+        <hr class="linha">
+        <div class="endereco">
+          <input type="text" placeholder="Rua">
+          <input type="text" placeholder="Número">
+          <input type="text" placeholder="Bairro">
+          <input type="text" placeholder="Cidade">
+        </div>
+
+        <hr class="linha">
+        <div class="local-trabalho">
+          <input type="text" placeholder="Local de Trabalho">
+          <input type="text" placeholder="Paredes">
+          <input type="text" placeholder="Pisos">
+          <input type="text" placeholder="Iluminação">
+          <input type="text" placeholder="Ventilação">
+        </div>
+
+        <hr class="linha">
+        <div>
+          <input type="text" placeholder="Data Perícia" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+          <input type="text" placeholder="Data Laudo" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+        </div>
+      </div>
+
+      <!--==========================
+         PERICULOSIDADE / INSALUBRIDADE
+      ============================-->
+      <div id="periculosidade insalubridade" class="conteudo">
+        <input type="text" placeholder="N° do Processo">
+
+        <div id="lista-reclamantes-ambos">
+          <div class="campo">
+            <input type="text" placeholder="Reclamante">
+            <button type="button" onclick="adicionarReclamante('lista-reclamantes-ambos')">+</button>
+            <button type="button" onclick="removerReclamante(this)">-</button>
+          </div>
+        </div>
+
+        <div id="lista-reclamadas-ambos">
+          <div class="campo">
+            <input type="text" placeholder="Reclamada">
+            <button type="button" onclick="adicionarCampo('lista-reclamadas-ambos')">+</button>
+            <button type="button" onclick="removerCampo(this)">-</button>
+          </div>
+        </div>
+
+        <hr class="linha">
+        <div id="container-ambos-peric"></div>
+        <div id="container-ambos-insalub"></div>
+        <div id="container-documentos-ambos"></div>
+
+        <hr class="linha">
+        <div class="endereco">
+          <input type="text" placeholder="Rua">
+          <input type="text" placeholder="Número">
+          <input type="text" placeholder="Bairro">
+          <input type="text" placeholder="Cidade">
+        </div>
+
+        <hr class="linha">
+        <div class="local-trabalho">
+          <input type="text" placeholder="Local de Trabalho">
+          <input type="text" placeholder="Paredes">
+          <input type="text" placeholder="Pisos">
+          <input type="text" placeholder="Iluminação">
+          <input type="text" placeholder="Ventilação">
+        </div>
+
+        <hr class="linha">
+        <div>
+          <input type="text" placeholder="Data Perícia" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+          <input type="text" placeholder="Data Laudo" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+        </div>
+      </div>
+
+      <div class="salvar-area">
+        <button class="salvar">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!--==========================
+        SCRIPTS
+  ============================-->
+  <script>
+    // ==========================
+    // FUNÇÕES DE RECLAMANTES E RECLAMADAS
+    // ==========================
+    function adicionarReclamante(idContainer) {
+      const container = document.getElementById(idContainer);
+      const div = document.createElement('div');
+      div.classList.add('campo');
+      div.innerHTML = `
+        <input type="text" placeholder="Reclamante">
+        <button type="button" onclick="adicionarReclamante('${idContainer}')">+</button>
+        <button type="button" onclick="removerReclamante(this)">-</button>`;
+      container.appendChild(div);
+    }
+
+    function removerReclamante(botao) {
+      if (botao.parentElement.parentElement.children.length > 1) botao.parentElement.remove();
+    }
+
+    function adicionarCampo(idContainer) {
+      const container = document.getElementById(idContainer);
+      const div = document.createElement('div');
+      div.classList.add('campo');
+      div.innerHTML = `
+        <input type="text" placeholder="Reclamada">
+        <button type="button" onclick="adicionarCampo('${idContainer}')">+</button>
+        <button type="button" onclick="removerCampo(this)">-</button>`;
+      container.appendChild(div);
+    }
+
+    function removerCampo(botao) {
+      if (botao.parentElement.parentElement.children.length > 1) botao.parentElement.remove();
+    }
+
+    // ==========================
+    // FUNÇÃO DE TROCAR ABAS
+    // ==========================
+    function trocarAba(event, aba) {
+      document.querySelectorAll('.conteudo').forEach(div => div.style.display = 'none');
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(aba).style.display = 'block';
+      event.target.classList.add('active');
+    }
+
+    // ==========================
+    // FUNÇÕES DE ANEXOS
+    // ==========================
+    function criarSelect(tipo, placeholder) {
+      const select = document.createElement("select");
+      select.style.color = "#999";
+
+      // Placeholder
+      const placeholderOption = document.createElement("option");
+      placeholderOption.value = "";
+      placeholderOption.textContent = placeholder;
+      placeholderOption.disabled = true;
+      placeholderOption.selected = true;
+      select.appendChild(placeholderOption);
+
+      const limite = (tipo === 'peric') ? 5 : 14;
+      for (let i = 1; i <= limite; i++) {
+        const opt = document.createElement("option");
+        opt.value = i;
+        opt.textContent = `Anexo ${i}`;
+        select.appendChild(opt);
+      }
+
+      if (tipo === 'peric') {
+        const optEstrela = document.createElement("option");
+        optEstrela.value = "*";
+        optEstrela.textContent = "Anexo *";
+        select.appendChild(optEstrela);
+      }
+
+      select.addEventListener("change", () => select.style.color = "#333");
+      return select;
+    }
+
+    function adicionarAnexo(idContainer, tipo, placeholder) {
+      const container = document.getElementById(idContainer);
+      const div = document.createElement("div");
+      div.classList.add("campo");
+
+      const select = criarSelect(tipo, placeholder);
+
+      const btnAdd = document.createElement("button");
+      btnAdd.type = "button";
+      btnAdd.textContent = "+";
+      btnAdd.onclick = () => adicionarAnexo(idContainer, tipo, placeholder);
+
+      const btnRem = document.createElement("button");
+      btnRem.type = "button";
+      btnRem.textContent = "-";
+      btnRem.onclick = () => { if(container.children.length > 1) div.remove(); };
+
+      div.append(select, btnAdd, btnRem);
+      container.appendChild(div);
+    }
+
+    // ==========================
+    // FUNÇÕES DE DOCUMENTOS
+    // ==========================
+    function criarSelectDocumento() {
+      const select = document.createElement("select");
+      select.style.color = "#999";
+      const opcoes = ["PGR", "EPI", "FDS", "LTCAT", "PCMSO", "ASO"];
+      opcoes.forEach(op => {
+        const opt = document.createElement("option");
+        opt.value = op;
+        opt.textContent = op;
+        select.appendChild(opt);
+      });
+      select.addEventListener("change", () => select.style.color = "#333");
+      return select;
+    }
+
+    function adicionarDocumento(idContainer) {
+      const container = document.getElementById(idContainer);
+      const div = document.createElement("div");
+      div.classList.add("campo");
+
+      const select = criarSelectDocumento();
+
+      const btnAdd = document.createElement("button");
+      btnAdd.type = "button";
+      btnAdd.textContent = "+";
+      btnAdd.onclick = () => adicionarDocumento(idContainer);
+
+      const btnRem = document.createElement("button");
+      btnRem.type = "button";
+      btnRem.textContent = "-";
+      btnRem.onclick = () => { if(container.children.length > 1) div.remove(); };
+
+      div.append(select, btnAdd, btnRem);
+      container.appendChild(div);
+    }
+
+    // ==========================
+    // INICIALIZAÇÃO
+    // ==========================
+    window.addEventListener('DOMContentLoaded', () => {
+      // Aba Periculosidade
+      adicionarAnexo('container-peric', 'peric', 'Selecione Anexo Periculosidade');
+      adicionarDocumento('container-documentos-peric');
+
+      // Aba Insalubridade
+      adicionarAnexo('container-insalub', 'insalub', 'Selecione Anexo Insalubridade');
+      adicionarDocumento('container-documentos-insalub');
+
+      // Aba Ambos
+      adicionarAnexo('container-ambos-peric', 'peric', 'Selecione Anexo Periculosidade');
+      adicionarAnexo('container-ambos-insalub', 'insalub', 'Selecione Anexo Insalubridade');
+      adicionarDocumento('container-documentos-ambos');
+    });
+  </script>
+
+  <div style="height: 400px;"></div>
+</body>
+</html>

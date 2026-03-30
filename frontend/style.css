@@ -1,0 +1,370 @@
+/* ==========================
+   ESPACAMENTO
+========================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #eef1f7;
+  height: auto;      
+  display: block;    
+}
+
+
+/* ==========================
+   CONTAINER PRINCIPAL / CENTRALIZA
+========================== */
+.main {
+  max-width: 1000px;
+  width: 100%;
+  padding: 20px 10px;
+  margin: 0 auto;      
+  text-align: center;
+}
+
+
+/* ==========================
+   CABECALHO
+========================== */
+.header {
+  display: none;
+}
+
+
+/* ==========================
+   DIRECIONAMENTO
+========================== */
+.link-btn {
+  text-decoration: none;
+}
+
+
+/* ==========================
+   BOTÕES GERAIS
+========================== */
+button, .salvar, .novo, .tab-btn {
+  transition: 0.3s;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+}
+
+
+/* BOTÃO PADRÃO */
+button {
+  padding: 18px 70px;
+  background: #5b7cff;
+  color: white;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(91,124,255,0.4);
+}
+
+button:hover {
+  background: #4a68e0;
+  transform: scale(1.05);
+}
+
+
+/* BOTÃO VOLTAR */
+.voltar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #5b7cff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.voltar:hover {
+  background: #4a68e0;
+  transform: scale(1.05);
+}
+
+
+/* BOTÃO SALVAR */
+.salvar {
+  padding: 12px 35px;
+  background: #5b7cff;
+  color: white;
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(91,124,255,0.4);
+  border-radius: 10px;
+}
+
+.salvar:hover {
+  background: #4a68e0;
+  transform: scale(1.05);
+}
+
+
+/* BOTÃO NOVO */
+.novo {
+  padding: 18px 70px;
+  background: #5b7cff;
+  color: white;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(91,124,255,0.4);
+  margin-bottom: 20px;
+}
+
+.novo:hover {
+  background: #4a68e0;
+  transform: scale(1.05);
+}
+
+
+/* ==========================
+   SEARCH
+========================== */
+.search-bar {
+  margin: 5px 0 10px 0;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 250px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+
+/* ==========================
+   TABELA
+========================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th {
+  background: #f0f2f8;
+  padding: 12px;
+  text-align: left;
+}
+
+td {
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+
+/* ==========================
+   ESPACO VAZIO
+========================== */
+.empty {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}
+
+
+/* ==========================
+   TITULOS
+========================== */
+.titulo {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #7b7b7b;
+}
+
+
+/* ==========================
+   CAIXA PRINCIPAL (LAUDO)
+========================== */
+.box {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  width: 450px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  margin: 0 auto 40px auto;
+}
+
+
+/* ==========================
+   ABAS (CORRIGIDO)
+========================== */
+.tabs {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 10px 20px; /* menor que botão padrão */
+  font-size: 14px;
+  background: #e0e7ff;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.tab-btn.active {
+  background: #5b7cff;
+  color: white;
+}
+
+.tab-btn:hover {
+  background: #4a68e0;
+  color: white;
+  transform: scale(1.05);
+}
+
+
+/* ==========================
+   INPUTS PADRÃO
+========================== */
+.conteudo {
+  margin-top: 10px;
+}
+
+.conteudo input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+
+/* ==========================
+   CAMPOS COM BOTÃO (+/-)
+========================== */
+.campo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.campo input,
+.campo select {
+  flex: 1;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background: white;
+  height: 42px;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+.campo button {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: #4a90e2;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: 0.2s;
+}
+
+.campo button:hover {
+  background: #357abd;
+}
+
+
+/* ==========================
+   📍 ENDEREÇO
+========================== */
+.endereco {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.endereco input {
+  padding: 8px;
+  font-size: 13px;
+  height: 34px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.endereco .linha2 {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+
+/* ==========================
+   LOCAL DE TRABALHO
+========================== */
+.local-trabalho {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.local-trabalho input {
+  padding: 8px;
+  font-size: 13px;
+  height: 34px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.local-trabalho .linha2 {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+
+/* ==========================
+   LINHA
+========================== */
+.linha {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ccc, transparent);
+  margin: 20px 0;
+}
+
+
+/* ==========================
+   BOTÃO SALVAR
+========================== */
+.salvar-area {
+  margin-top: 20px;
+}
+
+
+/* ==========================
+   ESPAÇO VAZIO
+========================== */
+.empty-space {
+  height: 400px;
+}
