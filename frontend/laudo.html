@@ -28,9 +28,9 @@
              TABS
       ============================-->
       <div class="tabs">
-        <button class="tab-btn active" onclick="trocarAba(event, 'periculosidade')">Periculosidade</button>
-        <button class="tab-btn" onclick="trocarAba(event, 'insalubridade')">Insalubridade</button>
-        <button class="tab-btn" onclick="trocarAba(event, 'periculosidade insalubridade')">Periculosidade/Insalubridade</button>
+        <button class="tab-btn active" onclick="trocarAba(event, 'periculosidade'); enviarLaudo('periculosidade')">Periculosidade</button>
+        <button class="tab-btn" onclick="trocarAba(event, 'insalubridade'); enviarLaudo('insalubridade')">Insalubridade</button>
+        <button class="tab-btn" onclick="trocarAba(event, 'periculosidade-insalubridade'); enviarLaudo('periculosidade-insalubridade')">Periculosidade/Insalubridade</button>
       </div>
 
       <!--==========================
@@ -134,7 +134,7 @@
       <!--==========================
          PERICULOSIDADE / INSALUBRIDADE
       ============================-->
-      <div id="periculosidade insalubridade" class="conteudo">
+      <div id="periculosidade-insalubridade" class="conteudo">
         <input type="text" placeholder="N° do Processo">
 
         <div id="lista-reclamantes-ambos">
@@ -182,10 +182,11 @@
         </div>
       </div>
 
-      <div class="salvar-area">
-        <button class="salvar">Salvar</button>
-      </div>
-    </div>
+<div class="salvar-area">
+  <button class="salvar" onclick="enviarListaReclamantes()">
+    Salvar
+  </button>
+</div>
   </div>
 
   <!--==========================
@@ -234,7 +235,6 @@
       document.getElementById(aba).style.display = 'block';
       event.target.classList.add('active');
     }
-
     // ==========================
     // FUNÇÕES DE ANEXOS
     // ==========================
@@ -296,6 +296,16 @@
     function criarSelectDocumento() {
       const select = document.createElement("select");
       select.style.color = "#999";
+
+      // Placeholder (mensagem inicial)
+      const placeholderOption = document.createElement("option");
+      placeholderOption.value = "";
+      placeholderOption.textContent = "Selecione os Documentos";
+      placeholderOption.disabled = true;
+      placeholderOption.selected = true;
+      select.appendChild(placeholderOption);
+
+      // Opções
       const opcoes = ["PGR", "EPI", "FDS", "LTCAT", "PCMSO", "ASO"];
       opcoes.forEach(op => {
         const opt = document.createElement("option");
@@ -303,7 +313,9 @@
         opt.textContent = op;
         select.appendChild(opt);
       });
+
       select.addEventListener("change", () => select.style.color = "#333");
+
       return select;
     }
 
@@ -345,6 +357,67 @@
       adicionarAnexo('container-ambos-insalub', 'insalub', 'Selecione Anexo Insalubridade');
       adicionarDocumento('container-documentos-ambos');
     });
+
+//=========================
+// FUNÇÕES DE ENVIAR DADOS LAUDOS
+// ==========================
+function pegarTipoAtivo() {
+  return document.querySelector(".tab-btn.active")?.innerText.toLowerCase();
+}
+
+async function enviarLaudo(tipo) {
+  try {
+    await fetch('http://localhost:5000/api/laudos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tipo: tipo })
+    });
+
+  } catch (erro) {
+    console.error("Erro:", erro);
+  }
+}
+
+
+function pegarLista(idContainer) {
+  const inputs = document.querySelectorAll(`#${idContainer} input`);
+  const lista = [];
+
+  inputs.forEach(input => {
+    if (input.value.trim()) {
+      lista.push(input.value.trim());
+    }
+  });
+
+  return lista;
+}
+
+async function enviarListaReclamantes() {
+  const lista = pegarLista("lista-reclamantes-peric");
+
+  try {
+    await fetch('http://localhost:5000/api/reclamantes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lista)
+    });
+
+    console.log("Enviado:", lista);
+
+  } catch (erro) {
+    console.error("Erro:", erro);
+  }
+}
+
+
+
+
+
+
+
+
+
+
   </script>
 
   <div style="height: 400px;"></div>

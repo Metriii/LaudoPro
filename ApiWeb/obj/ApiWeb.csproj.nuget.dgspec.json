@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vinic\\LaudoPro\\ApiWeb\\ApiWeb.csproj": {}
+    "C:\\Users\\vinic\\LaudoPro\\LaudoPro\\ApiWeb\\ApiWeb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vinic\\LaudoPro\\ApiWeb\\ApiWeb.csproj": {
+    "C:\\Users\\vinic\\LaudoPro\\LaudoPro\\ApiWeb\\ApiWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vinic\\LaudoPro\\ApiWeb\\ApiWeb.csproj",
+        "projectUniqueName": "C:\\Users\\vinic\\LaudoPro\\LaudoPro\\ApiWeb\\ApiWeb.csproj",
         "projectName": "ApiWeb",
-        "projectPath": "C:\\Users\\vinic\\LaudoPro\\ApiWeb\\ApiWeb.csproj",
+        "projectPath": "C:\\Users\\vinic\\LaudoPro\\LaudoPro\\ApiWeb\\ApiWeb.csproj",
         "packagesPath": "C:\\Users\\vinic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vinic\\LaudoPro\\ApiWeb\\obj\\",
+        "outputPath": "C:\\Users\\vinic\\LaudoPro\\LaudoPro\\ApiWeb\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\vinic\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\vinic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

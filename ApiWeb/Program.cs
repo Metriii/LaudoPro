@@ -1,41 +1,55 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy => policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+app.UseCors("AllowAll");
 
-app.UseHttpsRedirection();
-
-var summaries = new[]
+app.MapPost("/api/laudos", (LaudoRequest request) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
+
+    switch (request.Tipo)
+    {
+        case "periculosidade":
+            System.Console.WriteLine("Oi periculosidade");
+             
+            break;
+
+        case "insalubridade":
+            System.Console.WriteLine("Oi insalubridade");
+            break;
+
+        case "periculosidade-insalubridade":
+            System.Console.WriteLine("Oi periculosidade/insalubridade");
+            break;
+
+        default:
+            return Results.BadRequest("Tipo inválido");
+    }
+
+    return Results.Ok();
+});
+
+app.MapPost("/api/reclamantes", (List<string> lista) =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+    Console.WriteLine("=== RECLAMANTES ===");
+
+    foreach (var nome in lista)
+    {
+        Console.WriteLine($"- {nome}");
+    }
+
+    return Results.Ok();
+});
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+public record LaudoRequest(string Tipo);

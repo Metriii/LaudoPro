@@ -8,6 +8,7 @@ namespace ApiWeb.Entities.Corpo
 {
     enum DocumentosAnalisados
     {
+        Nenhum,
         PGR,
         EPI,
         FDS,

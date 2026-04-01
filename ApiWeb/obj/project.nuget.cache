@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iINEtiL4/jY=",
+  "dgSpecHash": "Ngl3IueHUR0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\vinic\\LaudoPro\\ApiWeb\\ApiWeb.csproj",
+  "projectFilePath": "C:\\Users\\vinic\\LaudoPro\\LaudoPro\\ApiWeb\\ApiWeb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vinic\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.5\\microsoft.aspnetcore.openapi.10.0.5.nupkg.sha512",
     "C:\\Users\\vinic\\.nuget\\packages\\microsoft.data.sqlite\\10.0.5\\microsoft.data.sqlite.10.0.5.nupkg.sha512",
