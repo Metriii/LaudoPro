@@ -27,17 +27,19 @@
       <!--==========================
              TABS
       ============================-->
-      <div class="tabs">
-        <button class="tab-btn active" onclick="trocarAba(event, 'periculosidade'); enviarLaudo('periculosidade')">Periculosidade</button>
-        <button class="tab-btn" onclick="trocarAba(event, 'insalubridade'); enviarLaudo('insalubridade')">Insalubridade</button>
-        <button class="tab-btn" onclick="trocarAba(event, 'periculosidade-insalubridade'); enviarLaudo('periculosidade-insalubridade')">Periculosidade/Insalubridade</button>
-      </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tipo="periculosidade" onclick="trocarAba(event, 'periculosidade'); pegarTipo(this)">Periculosidade</button>
+      <button class="tab-btn" data-tipo="insalubridade" onclick="trocarAba(event, 'insalubridade'); pegarTipo(this)">Insalubridade</button>
+      <button class="tab-btn" data-tipo="periculosidade-insalubridade" onclick="trocarAba(event, 'periculosidade-insalubridade'); pegarTipo(this)">Periculosidade/Insalubridade</button>
+    </div>
+
+
 
       <!--==========================
              PERICULOSIDADE
       ============================-->
       <div id="periculosidade" class="conteudo" style="display:block;">
-        <input type="text" placeholder="N° do Processo">
+        <input type="text" id="numero-processo" placeholder="N° do Processo">
         <div id="lista-reclamantes-peric">
           <div class="campo">
             <input type="text" placeholder="Reclamante">
@@ -60,25 +62,31 @@
 
         <hr class="linha">
         <div class="endereco">
-          <input type="text" placeholder="Rua">
-          <input type="text" placeholder="Número">
-          <input type="text" placeholder="Bairro">
-          <input type="text" placeholder="Cidade">
+          <input type="text" id="rua" placeholder="Rua">
+          <input type="text" id="numero" placeholder="Número">
+          <input type="text" id="bairro" placeholder="Bairro">
+          <input type="text" id="cidade" placeholder="Cidade">
         </div>
 
         <hr class="linha">
         <div class="local-trabalho">
-          <input type="text" placeholder="Local de Trabalho">
-          <input type="text" placeholder="Paredes">
-          <input type="text" placeholder="Pisos">
-          <input type="text" placeholder="Iluminação">
-          <input type="text" placeholder="Ventilação">
+          <input type="text" id="local" placeholder="Local de Trabalho">
+          <input type="text" id="paredes" placeholder="Paredes">
+          <input type="text" id="pisos" placeholder="Pisos">
+          <input type="text" id="iluminacao" placeholder="Iluminação">
+          <input type="text" id="ventilacao" placeholder="Ventilação">
         </div>
 
         <hr class="linha">
         <div>
           <input type="text" placeholder="Data Perícia" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
           <input type="text" placeholder="Data Laudo" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+        </div>
+
+        <div class="salvar-area">
+          <button class="salvar" onclick="enviarListaReclamantes(); enviarLaudo(); enviarListaReclamada();enviarListaAnexos();enviarListaDocumentos();enviarNumeroProcesso(); enviarLocalTrabalho(); enviarEndereco();">
+            Salvar
+          </button>
         </div>
       </div>
 
@@ -117,11 +125,11 @@
 
         <hr class="linha">
         <div class="local-trabalho">
-          <input type="text" placeholder="Local de Trabalho">
-          <input type="text" placeholder="Paredes">
-          <input type="text" placeholder="Pisos">
-          <input type="text" placeholder="Iluminação">
-          <input type="text" placeholder="Ventilação">
+          <input type="text" id="local" placeholder="Local de Trabalho">
+          <input type="text" id="paredes" placeholder="Paredes">
+          <input type="text" id="pisos" placeholder="Pisos">
+          <input type="text" id="iluminacao" placeholder="Iluminação">
+          <input type="text" id="ventilacao" placeholder="Ventilação">
         </div>
 
         <hr class="linha">
@@ -135,7 +143,7 @@
          PERICULOSIDADE / INSALUBRIDADE
       ============================-->
       <div id="periculosidade-insalubridade" class="conteudo">
-        <input type="text" placeholder="N° do Processo">
+        <input type="text" id="numero-processo" placeholder="N° do Processo">
 
         <div id="lista-reclamantes-ambos">
           <div class="campo">
@@ -168,11 +176,11 @@
 
         <hr class="linha">
         <div class="local-trabalho">
-          <input type="text" placeholder="Local de Trabalho">
-          <input type="text" placeholder="Paredes">
-          <input type="text" placeholder="Pisos">
-          <input type="text" placeholder="Iluminação">
-          <input type="text" placeholder="Ventilação">
+          <input type="text" id="local" placeholder="Local de Trabalho">
+          <input type="text" id="paredes" placeholder="Paredes">
+          <input type="text" id="pisos" placeholder="Pisos">
+          <input type="text" id="iluminacao" placeholder="Iluminação">
+          <input type="text" id="ventilacao" placeholder="Ventilação">
         </div>
 
         <hr class="linha">
@@ -182,11 +190,7 @@
         </div>
       </div>
 
-<div class="salvar-area">
-  <button class="salvar" onclick="enviarListaReclamantes()">
-    Salvar
-  </button>
-</div>
+
   </div>
 
   <!--==========================
@@ -361,20 +365,37 @@
 //=========================
 // FUNÇÕES DE ENVIAR DADOS LAUDOS
 // ==========================
-function pegarTipoAtivo() {
-  return document.querySelector(".tab-btn.active")?.innerText.toLowerCase();
+// inicializa com o botão ativo já selecionado
+let tipoSelecionado = document.querySelector(".tab-btn.active")?.dataset.tipo;
+
+// função chamada ao clicar nos botões de tipo
+function pegarTipo(botao) {
+  tipoSelecionado = botao.dataset.tipo; // pega do atributo data-tipo
+  console.log("Tipo selecionado:", tipoSelecionado);
+
+  // atualizar visual do botão ativo
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  botao.classList.add("active");
 }
 
-async function enviarLaudo(tipo) {
+// função chamada no botão salvar
+async function enviarLaudo() {
+  if (!tipoSelecionado) {
+    alert("Selecione um tipo antes de salvar!");
+    return;
+  }
+
   try {
     await fetch('http://localhost:5000/api/laudos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tipo: tipo })
+      body: JSON.stringify({ tipo: tipoSelecionado })
     });
 
+    console.log("Laudo enviado:", tipoSelecionado);
+
   } catch (erro) {
-    console.error("Erro:", erro);
+    console.error("Erro ao enviar laudo:", erro);
   }
 }
 
@@ -409,16 +430,172 @@ async function enviarListaReclamantes() {
   }
 }
 
+function pegarListaReclamada(idContainer) {
+  const inputs = document.querySelectorAll(`#${idContainer} input`);
+  const lista = [];
+
+  inputs.forEach(input => {
+    if (input.value.trim()) {
+      lista.push(input.value.trim());
+    }
+  });
+
+  return lista;
+}
+async function enviarListaReclamada() {
+  const lista = pegarListaReclamada("lista-reclamadas-peric"); // ID do container de inputs da reclamada
+
+  try {
+    await fetch('http://localhost:5000/api/reclamadas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lista)
+    });
+
+    console.log("Lista da reclamada enviada:", lista);
+
+  } catch (erro) {
+    console.error("Erro ao enviar lista da reclamada:", erro);
+  }
+}
+
+function pegarListaAnexos(idContainer) {
+  const selects = document.querySelectorAll(`#${idContainer} select`);
+  const lista = [];
+
+  selects.forEach(select => {
+    if (select.value) {
+      lista.push(select.value);
+    }
+  });
+
+  return lista;
+}
+
+async function enviarListaAnexos() {
+  const lista = pegarListaAnexos("container-peric");
+
+  console.log("Anexos:", lista); // 👈 TESTE IMPORTANTE
+
+  try {
+    await fetch('http://localhost:5000/api/anexos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lista)
+    });
+
+    console.log("Anexos enviados:", lista);
+
+  } catch (erro) {
+    console.error("Erro:", erro);
+  }
+}
+
+function pegarListaDocumentos(idContainer) {
+  const selects = document.querySelectorAll(`#${idContainer} select`);
+  const lista = [];
+
+  selects.forEach(select => {
+    if (select.value) {
+      lista.push(select.value);
+    }
+  });
+
+  return lista;
+}
+
+async function enviarListaDocumentos() {
+  const lista = pegarListaDocumentos("container-documentos-peric");
+
+  console.log("Documentos:", lista); // 👈 TESTE IMPORTANTE
+
+  try {
+    await fetch('http://localhost:5000/api/documentos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lista)
+    });
+
+    console.log("Documentos enviados:", lista);
+
+  } catch (erro) {
+    console.error("Erro:", erro);
+  }
+}
+
+function pegarNumeroProcesso() {
+  const input = document.getElementById("numero-processo");
+  return input.value.trim();
+}
+async function enviarNumeroProcesso() {
+  const numero = pegarNumeroProcesso();
+
+  try {
+    await fetch('http://localhost:5000/api/processo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(numero)    
+    });
+
+    console.log("Número do processo enviado:", numero);
+
+  } catch (erro) {
+    console.error("Erro:", erro);
+  }
+}
+function pegarLocalTrabalho() {
+  return {
+    local: document.getElementById("local").value.trim(),
+    paredes: document.getElementById("paredes").value.trim(),
+    pisos: document.getElementById("pisos").value.trim(),
+    iluminacao: document.getElementById("iluminacao").value.trim(),
+    ventilacao: document.getElementById("ventilacao").value.trim()
+  };
+}
+
+async function enviarLocalTrabalho() {
+  const dados = pegarLocalTrabalho();
+
+  console.log("Enviando:", dados);
+
+  await fetch('http://localhost:5000/api/local-trabalho', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dados)
+  });
+}
+
+function pegarEndereco() {
+  return {
+    rua: document.getElementById("rua").value.trim(),
+    numero: document.getElementById("numero").value.trim(),
+    bairro: document.getElementById("bairro").value.trim(),
+    cidade: document.getElementById("cidade").value.trim()
+  };
+}
+
+async function enviarEndereco() {
+  const dados = pegarEndereco();
+
+  console.log("ENVIANDO:", dados); // 👈 ESSENCIAL
+
+  try {
+    const response = await fetch('http://localhost:5000/api/endereco', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    });
+
+    console.log("STATUS:", response.status);
+
+  } catch (erro) {
+    console.error("Erro:", erro);
+  }
+}
 
 
 
-
-
-
-
-
-
-  </script>
+</script>
 
   <div style="height: 400px;"></div>
 </body>
