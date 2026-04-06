@@ -79,12 +79,12 @@
 
         <hr class="linha">
         <div>
-          <input type="text" placeholder="Data Perícia" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
-          <input type="text" placeholder="Data Laudo" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+          <input type="text" id="data-pericia" placeholder="Data Perícia" onfocus="this.type='date'"onblur="if(!this.value)this.type='text'">
+          <input type="text" id="data-laudo" placeholder="Data Laudo" onfocus="this.type='date'"onblur="if(!this.value)this.type='text'">        
         </div>
 
         <div class="salvar-area">
-          <button class="salvar" onclick="enviarListaReclamantes(); enviarLaudo(); enviarListaReclamada();enviarListaAnexos();enviarListaDocumentos();enviarNumeroProcesso(); enviarLocalTrabalho(); enviarEndereco();">
+          <button class="salvar" onclick="enviarPericulosidade()">
             Salvar
           </button>
         </div>
@@ -592,6 +592,86 @@ async function enviarEndereco() {
     console.error("Erro:", erro);
   }
 }
+
+async function enviarDataLaudo() {
+  const input = document.getElementById("data-laudo");
+  const data = input.value;
+
+  // yyyy-MM-dd → dd/MM/yyyy
+  const [ano, mes, dia] = data.split("-");
+  const dataFormatada = `${dia}/${mes}/${ano}`;
+
+  try {
+    await fetch('http://localhost:5000/api/data-laudo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dataFormatada)
+    });
+
+  } catch (erro) {
+    console.error("Erro:", erro);
+  }
+}
+async function enviarDataPericia() {
+  const input = document.getElementById("data-pericia");
+  const data = input.value;
+  // yyyy-MM-dd → dd/MM/yyyy
+  const [ano, mes, dia] = data.split("-");
+  const dataFormatada = `${dia}/${mes}/${ano}`;
+  try {
+    await fetch('http://localhost:5000/api/data-pericia', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dataFormatada)
+    });
+
+  } catch (erro) {
+    console.error("Erro:", erro);
+  }
+}
+
+async function enviarPericulosidade() {
+  try {
+const dados = {
+  tipo: tipoSelecionado,
+  numeroPericia: pegarNumeroProcesso(),
+
+  reclamantes: pegarLista("lista-reclamantes-peric"),
+  reclamadas: pegarLista("lista-reclamadas-peric"),
+  anexos: pegarListaAnexos("container-peric"),
+  documentos: pegarListaDocumentos("container-documentos-peric"),
+
+  localTrabalho: pegarLocalTrabalho(),
+  endereco: pegarEndereco(),
+
+  dataLaudo: (() => {
+    const data = document.getElementById("data-laudo").value;
+    if (!data) return "";
+    const [ano, mes, dia] = data.split("-");
+    return `${dia}/${mes}/${ano}`;
+  })(),
+
+  dataPericia: (() => {
+    const data = document.getElementById("data-pericia").value;
+    if (!data) return "";
+    const [ano, mes, dia] = data.split("-");
+    return `${dia}/${mes}/${ano}`;
+  })()
+};
+
+    console.log("Enviando tudo:", dados);
+
+    await fetch('http://localhost:5000/api/laudo-completo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    });
+
+  } catch (erro) {
+    console.error("Erro geral:", erro);
+  }
+}
+
 
 
 

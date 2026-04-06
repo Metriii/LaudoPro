@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ApiWeb.Entities.Corpo;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,105 +16,58 @@ var app = builder.Build();
 
 app.UseCors("AllowAll");
 
-app.MapPost("/api/laudos", (LaudoRequest request) =>
+
+
+app.MapPost("/api/laudo-completo", async (HttpContext context) =>
 {
+    using var reader = new StreamReader(context.Request.Body);
+    var body = await reader.ReadToEndAsync();
 
+    // Opcional: parsear só pra organizar melhor
+    var json = JsonDocument.Parse(body);
+    var root = json.RootElement;
 
-    switch (request.Tipo)
-    {
-        case "periculosidade":
-            System.Console.WriteLine("Oi periculosidade");
-             
-            break;
+    Console.WriteLine("=== DADOS SEPARADOS ===");
 
-        case "insalubridade":
-            System.Console.WriteLine("Oi insalubridade");
-            break;
+    Console.WriteLine($"Tipo: {root.GetProperty("tipo")}");
+    
+    Console.WriteLine($"Número: {root.GetProperty("numeroPericia")}");
 
-        case "periculosidade-insalubridade":
-            System.Console.WriteLine("Oi periculosidade/insalubridade");
-            break;
+    Console.WriteLine("Reclamantes:");
+    foreach (var item in root.GetProperty("reclamantes").EnumerateArray())
+        Console.WriteLine($"- {item}");
 
-        default:
-            return Results.BadRequest("Tipo inválido");
-    }
+    Console.WriteLine("Reclamadas:");
+    foreach (var item in root.GetProperty("reclamadas").EnumerateArray())
+        Console.WriteLine($"- {item}");
+
+    Console.WriteLine("Anexos:");
+    foreach (var item in root.GetProperty("anexos").EnumerateArray())
+        Console.WriteLine($"- {item}");
+
+    Console.WriteLine("Documentos:");
+    foreach (var item in root.GetProperty("documentos").EnumerateArray())
+        Console.WriteLine($"- {item}");
+
+    Console.WriteLine("Local de Trabalho:");
+    var local = root.GetProperty("localTrabalho");
+    Console.WriteLine(local.GetProperty("local"));
+    Console.WriteLine(local.GetProperty("paredes"));
+    Console.WriteLine(local.GetProperty("pisos"));
+    Console.WriteLine(local.GetProperty("iluminacao"));
+    Console.WriteLine(local.GetProperty("ventilacao"));
+
+    Console.WriteLine("Endereço:");
+    var endereco = root.GetProperty("endereco");
+    Console.WriteLine(endereco.GetProperty("rua"));
+    Console.WriteLine(endereco.GetProperty("numero"));
+    Console.WriteLine(endereco.GetProperty("bairro"));
+    Console.WriteLine(endereco.GetProperty("cidade"));
+
+    Console.WriteLine($"Data Laudo: {root.GetProperty("dataLaudo")}");
+    Console.WriteLine($"Data Perícia: {root.GetProperty("dataPericia")}");
 
     return Results.Ok();
-});
-
-app.MapPost("/api/reclamantes", (List<string> lista) =>
-{
-    Console.WriteLine("=== RECLAMANTES ===");
-
-    foreach (var nome in lista)
-    {
-        Console.WriteLine($"- {nome} reclamantes");
-    }
-
-});
-app.MapPost("/api/reclamadas", (List<string> lista) =>
-{
-    Console.WriteLine("=== RECLAMADAS ===");
-
-    foreach (var nome in lista)
-    {
-        Console.WriteLine($"- {nome} reclamada");
-    }
-
-});
-app.MapPost("/api/anexos", (List<string> lista) =>
-{
-    Console.WriteLine("=== ANEXOS ===");
-
-    foreach (var nome in lista)
-    {
-        Console.WriteLine($"- {nome} anexos");
-    }
-
-});
-
-app.MapPost("/api/documentos", (List<string> lista) =>
-{
-    Console.WriteLine("=== DOCUMENTOS ===");
-
-    foreach (var nome in lista)
-    {
-        Console.WriteLine($"- {nome} documentos");
-    }
-
-   
-});
-
-app.MapPost("/api/processo", ([FromBody]string numero) =>
-{
-        Console.WriteLine($"- {numero} N° processo");
-    
-
-    
-});
-
-app.MapPost("/api/local-trabalho", (LocalDeTrabalho local) =>
-{
-    Console.WriteLine("=== LOCAL DE TRABALHO ===");
-
-    Console.WriteLine(local.Local);
-    Console.WriteLine(local.Paredes);
-    Console.WriteLine(local.Pisos);
-    Console.WriteLine(local.Iluminacao);
-    Console.WriteLine(local.Ventilacao);
-
-    
-});
-app.MapPost("/api/endereco", (Endereco endereco) =>
-{
-    Console.WriteLine("CHEGOU!");
-
-    Console.WriteLine(endereco.Rua);
-    Console.WriteLine(endereco.Numero);
-    Console.WriteLine(endereco.Bairro);
-    Console.WriteLine(endereco.Cidade);
-
-    
 });
 app.Run();
 
