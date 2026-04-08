@@ -2,10 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using ApiWeb.Entities.Insalubridade;
 using ApiWeb.Entities.Periculosidade;
+using System.Collections.Generic;
+using ApiWeb.Entities.Corpo;
 using ApiWeb.Entities.Ambos;
-
-
-using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +24,6 @@ app.UseCors("AllowAll");
 
 app.MapPost("/api/laudo-pericu", async (HttpContext context) =>
 {
-    Periculosidade periculosidade = new Periculosidade();
     using var reader = new StreamReader(context.Request.Body);
     var body = await reader.ReadToEndAsync();
 
@@ -34,45 +32,66 @@ app.MapPost("/api/laudo-pericu", async (HttpContext context) =>
 
     Console.WriteLine("=== PERICULOSIDADE ===");
 
-    Console.WriteLine($"Tipo: {root.GetProperty("tipo")}");
-    Console.WriteLine($"Número: {root.GetProperty("numeroPericia")}");
 
-    Console.WriteLine("Reclamantes:");
+string numeroPericia = root.TryGetProperty("numeroPericia", out var n)? n.GetString() ?? "": "";
+    List<string> reclamantes = new List<string>();
+    
     foreach (var item in root.GetProperty("reclamantes").EnumerateArray())
-        Console.WriteLine($"- {item}");
+    {
+        var valor = item.GetString();
+        if (valor != null)
+            reclamantes.Add(valor);
+    }
+    
+    
+    
+    List<string> reclamadas = new List<string>();
+    foreach (var item in root.GetProperty("reclamadas").EnumerateArray()){
+        var valor = item.GetString();
+        if (valor != null)
+            reclamadas.Add(valor);
+    }
 
-    Console.WriteLine("Reclamadas:");
-    foreach (var item in root.GetProperty("reclamadas").EnumerateArray())
-        Console.WriteLine($"- {item}");
+    List<string> anexosPericu = new List<string>();
+    foreach (var item in root.GetProperty("anexos").EnumerateArray()){
+        var valor = item.GetString();
+        if (valor != null)
+            anexosPericu.Add(valor);
+    }
 
-    Console.WriteLine("Anexos:");
-    foreach (var item in root.GetProperty("anexos").EnumerateArray())
-        Console.WriteLine($"- {item}");
+    List<string> documentos = new List<string>();
+    foreach (var item in root.GetProperty("documentos").EnumerateArray()){
+        var valor = item.GetString();
+        if (valor != null)
+            documentos.Add(valor);
+    }
 
-    Console.WriteLine("Documentos:");
-    foreach (var item in root.GetProperty("documentos").EnumerateArray())
-        Console.WriteLine($"- {item}");
-
-    Console.WriteLine("Local de Trabalho:");
     var local = root.GetProperty("localTrabalho");
-    Console.WriteLine(local.GetProperty("local"));
-    Console.WriteLine(local.GetProperty("paredes"));
-    Console.WriteLine(local.GetProperty("pisos"));
-    Console.WriteLine(local.GetProperty("iluminacao"));
-    Console.WriteLine(local.GetProperty("ventilacao"));
+    string localAtividade = local.GetProperty("local").GetString() ?? "";
+    string paredes = local.GetProperty("paredes").GetString() ?? "";
+    string pisos = local.GetProperty("pisos").GetString() ?? "";
+    string iluminacao = local.GetProperty("iluminacao").GetString() ?? "";
+    string ventilacao = local.GetProperty("ventilacao").GetString() ?? "";
 
-    Console.WriteLine("Endereço:");
+
     var endereco = root.GetProperty("endereco");
-    Console.WriteLine(endereco.GetProperty("rua"));
-    Console.WriteLine(endereco.GetProperty("numero"));
-    Console.WriteLine(endereco.GetProperty("bairro"));
-    Console.WriteLine(endereco.GetProperty("cidade"));
+    string rua    = endereco.GetProperty("rua").GetString() ?? "";
+    string numero = endereco.GetProperty("numero").GetString() ?? "";
+    string bairro = endereco.GetProperty("bairro").GetString() ?? "";
+    string cidade = endereco.GetProperty("cidade").GetString() ?? "";
 
-    Console.WriteLine($"Data Laudo: {root.GetProperty("dataLaudo")}");
-    Console.WriteLine($"Data Perícia: {root.GetProperty("dataPericia")}");
 
+    string dataLaudo = root.GetProperty("dataLaudo").GetString() ?? "";
+    string dataPericia = root.GetProperty("dataPericia").GetString() ?? "";
+
+
+    Periculosidade periculo = new Periculosidade(numeroPericia, dataPericia, dataLaudo, new LocalDeTrabalho(localAtividade, paredes, pisos, iluminacao, ventilacao), new Endereco(rua, numero, cidade, bairro), reclamantes, reclamadas, documentos, anexosPericu);
+    System.Console.WriteLine(periculo);
     return Results.Ok();
 });
+
+
+
 app.MapPost("/api/laudo-insalub", async (HttpContext context) =>
 {
     using var reader = new StreamReader(context.Request.Body);
@@ -84,44 +103,64 @@ app.MapPost("/api/laudo-insalub", async (HttpContext context) =>
     Console.WriteLine("=== INSALUBRIDADE ===");
 
     Console.WriteLine($"Tipo: {root.GetProperty("tipo")}");
-    Console.WriteLine($"Número: {root.GetProperty("numeroPericia")}");
+string numeroPericia = root.TryGetProperty("numeroPericia", out var n)? n.GetString() ?? "": "";
 
-    Console.WriteLine("Reclamantes:");
+
+    List<string> reclamantes = new List<string>();
+    
     foreach (var item in root.GetProperty("reclamantes").EnumerateArray())
-        Console.WriteLine($"- {item}");
+    {
+        var valor = item.GetString();
+        if (valor != null)
+            reclamantes.Add(valor);
+    }    
+    
+    List<string> reclamadas = new List<string>();
+    foreach (var item in root.GetProperty("reclamadas").EnumerateArray()){
+        var valor = item.GetString();
+        if (valor != null)
+            reclamadas.Add(valor);
+    }
 
-    Console.WriteLine("Reclamadas:");
-    foreach (var item in root.GetProperty("reclamadas").EnumerateArray())
-        Console.WriteLine($"- {item}");
+    List<string> anexosInsalub = new List<string>();
+    foreach (var item in root.GetProperty("anexos").EnumerateArray()){
+        var valor = item.GetString();
+        if (valor != null)
+            anexosInsalub.Add(valor);
+    }
 
-    Console.WriteLine("Anexos:");
-    foreach (var item in root.GetProperty("anexos").EnumerateArray())
-        Console.WriteLine($"- {item}");
+    List<string> documentos = new List<string>();
+    foreach (var item in root.GetProperty("documentos").EnumerateArray()){
+        var valor = item.GetString();
+        if (valor != null)
+            documentos.Add(valor);
+    }
 
-    Console.WriteLine("Documentos:");
-    foreach (var item in root.GetProperty("documentos").EnumerateArray())
-        Console.WriteLine($"- {item}");
+        var local = root.GetProperty("localTrabalho");
+    string localAtividade = local.GetProperty("local").GetString() ?? "";
+    string paredes = local.GetProperty("paredes").GetString() ?? "";
+    string pisos = local.GetProperty("pisos").GetString() ?? "";
+    string iluminacao = local.GetProperty("iluminacao").GetString() ?? "";
+    string ventilacao = local.GetProperty("ventilacao").GetString() ?? "";
 
-    Console.WriteLine("Local de Trabalho:");
-    var local = root.GetProperty("localTrabalho");
-    Console.WriteLine(local.GetProperty("local"));
-    Console.WriteLine(local.GetProperty("paredes"));
-    Console.WriteLine(local.GetProperty("pisos"));
-    Console.WriteLine(local.GetProperty("iluminacao"));
-    Console.WriteLine(local.GetProperty("ventilacao"));
 
-    Console.WriteLine("Endereço:");
     var endereco = root.GetProperty("endereco");
-    Console.WriteLine(endereco.GetProperty("rua"));
-    Console.WriteLine(endereco.GetProperty("numero"));
-    Console.WriteLine(endereco.GetProperty("bairro"));
-    Console.WriteLine(endereco.GetProperty("cidade"));
+    string rua    = endereco.GetProperty("rua").GetString() ?? "";
+    string numero = endereco.GetProperty("numero").GetString() ?? "";
+    string bairro = endereco.GetProperty("bairro").GetString() ?? "";
+    string cidade = endereco.GetProperty("cidade").GetString() ?? "";
 
-    Console.WriteLine($"Data Laudo: {root.GetProperty("dataLaudo")}");
-    Console.WriteLine($"Data Perícia: {root.GetProperty("dataPericia")}");
 
+    string dataLaudo = root.GetProperty("dataLaudo").GetString() ?? "";
+    string dataPericia = root.GetProperty("dataPericia").GetString() ?? "";
+
+    Insalubridade insalub = new Insalubridade(numeroPericia, dataPericia, dataLaudo, new LocalDeTrabalho(localAtividade, paredes, pisos, iluminacao, ventilacao), new Endereco(rua, numero, cidade, bairro), reclamantes, reclamadas, documentos, anexosInsalub);
+    System.Console.WriteLine(insalub);
     return Results.Ok();
 });
+
+
+
 app.MapPost("/api/laudo-ambos", async (HttpContext context) =>
 {
     using var reader = new StreamReader(context.Request.Body);
@@ -132,47 +171,85 @@ app.MapPost("/api/laudo-ambos", async (HttpContext context) =>
 
     Console.WriteLine("=== LAUDO AMBOS ===");
 
-    Console.WriteLine($"Tipo: {root.GetProperty("tipo")}");
-    Console.WriteLine($"Número Perícia: {root.GetProperty("numeroPericia")}");
-
-    Console.WriteLine("Reclamantes:");
+string numeroPericia = root.TryGetProperty("numeroPericia", out var n)? n.GetString() ?? "": "";
+    List<string> reclamantes = new List<string>();
+    
     foreach (var item in root.GetProperty("reclamantes").EnumerateArray())
-        Console.WriteLine($"- {item}");
+    {
+        var valor = item.GetString();
+        if (valor != null)
+            reclamantes.Add(valor);
+    }
+    
+    
+    
+    List<string> reclamadas = new List<string>();
+    foreach (var item in root.GetProperty("reclamadas").EnumerateArray()){
+        var valor = item.GetString();
+        if (valor != null)
+            reclamadas.Add(valor);
+    }
+// ANEXOS PERICULOSIDADE
+List<string> anexosPericulosidade = new List<string>();
+if (root.TryGetProperty("anexosPericulosidade", out var pericArray) &&
+    pericArray.ValueKind == JsonValueKind.Array)
+{
+    foreach (var item in pericArray.EnumerateArray())
+    {
+        var valor = item.GetString();
+        if (valor != null)
+            anexosPericulosidade.Add(valor);
+    }
+}
 
-    Console.WriteLine("Reclamadas:");
-    foreach (var item in root.GetProperty("reclamadas").EnumerateArray())
-        Console.WriteLine($"- {item}");
 
-    Console.WriteLine("Anexos Periculosidade:");
-    foreach (var item in root.GetProperty("anexosPericulosidade").EnumerateArray())
-        Console.WriteLine($"- {item}");
+// ANEXOS INSALUBRIDADE
+List<string> anexosInsalubridade = new List<string>();
+if (root.TryGetProperty("anexosInsalubridade", out var insalArray) &&
+    insalArray.ValueKind == JsonValueKind.Array)
+{
+    foreach (var item in insalArray.EnumerateArray())
+    {
+        var valor = item.GetString();
+        if (valor != null)
+            anexosInsalubridade.Add(valor);
+    }
+}
 
-    Console.WriteLine("Anexos Insalubridade:");
-    foreach (var item in root.GetProperty("anexosInsalubridade").EnumerateArray())
-        Console.WriteLine($"- {item}");
 
-    Console.WriteLine("Documentos:");
-    foreach (var item in root.GetProperty("documentos").EnumerateArray())
-        Console.WriteLine($"- {item}");
+// DOCUMENTOS
+List<string> documentos = new List<string>();
+if (root.TryGetProperty("documentos", out var docsArray) &&
+    docsArray.ValueKind == JsonValueKind.Array)
+{
+    foreach (var item in docsArray.EnumerateArray())
+    {
+        var valor = item.GetString();
+        if (valor != null)
+            documentos.Add(valor);
+    }
+}
 
-    Console.WriteLine("Local de Trabalho:");
     var local = root.GetProperty("localTrabalho");
-    Console.WriteLine(local.GetProperty("local"));
-    Console.WriteLine(local.GetProperty("paredes"));
-    Console.WriteLine(local.GetProperty("pisos"));
-    Console.WriteLine(local.GetProperty("iluminacao"));
-    Console.WriteLine(local.GetProperty("ventilacao"));
+    string localAtividade = local.GetProperty("local").GetString() ?? "";
+    string paredes = local.GetProperty("paredes").GetString() ?? "";
+    string pisos = local.GetProperty("pisos").GetString() ?? "";
+    string iluminacao = local.GetProperty("iluminacao").GetString() ?? "";
+    string ventilacao = local.GetProperty("ventilacao").GetString() ?? "";
 
-    Console.WriteLine("Endereço:");
+
     var endereco = root.GetProperty("endereco");
-    Console.WriteLine(endereco.GetProperty("rua"));
-    Console.WriteLine(endereco.GetProperty("numero"));
-    Console.WriteLine(endereco.GetProperty("bairro"));
-    Console.WriteLine(endereco.GetProperty("cidade"));
+    string rua    = endereco.GetProperty("rua").GetString() ?? "";
+    string numero = endereco.GetProperty("numero").GetString() ?? "";
+    string bairro = endereco.GetProperty("bairro").GetString() ?? "";
+    string cidade = endereco.GetProperty("cidade").GetString() ?? "";
 
-    Console.WriteLine($"Data Perícia: {root.GetProperty("dataPericia")}");
-    Console.WriteLine($"Data Laudo: {root.GetProperty("dataLaudo")}");
 
+    string dataLaudo = root.GetProperty("dataLaudo").GetString() ?? "";
+    string dataPericia = root.GetProperty("dataPericia").GetString() ?? "";
+
+    Ambos ambos = new Ambos(numeroPericia, dataPericia, dataLaudo, new LocalDeTrabalho(localAtividade, paredes, pisos, iluminacao, ventilacao), new Endereco(rua, numero, cidade, bairro), reclamantes, reclamadas, documentos, anexosInsalubridade, anexosPericulosidade);
+    System.Console.WriteLine(ambos);
     return Results.Ok();
 });
 app.Run();

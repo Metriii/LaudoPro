@@ -13,7 +13,7 @@ namespace ApiWeb.Entities.Ambos
         public List<string> AnexosPericu { get; set; } = new List<string>();
 
         public Ambos(){}
-        public Ambos(string numeroPericia, string dataPericia, string dataLaudo, LocalDeTrabalho atividades, Endereco endereco) : base(numeroPericia, dataPericia, dataLaudo, atividades, endereco)
+        public Ambos(string numeroPericia, string dataPericia, string dataLaudo, LocalDeTrabalho atividades, Endereco endereco, List<string> reclamantes, List<string> reclamadas, List<string> documentos, List<string> anexosPericu, List<string> anexosInsalub) : base(numeroPericia, dataPericia, dataLaudo, atividades, endereco)
         {
             NumeroPericia = numeroPericia;
             char numeroVara = NumeroPericia[NumeroPericia.Length - 1];
@@ -22,63 +22,28 @@ namespace ApiWeb.Entities.Ambos
             DataLaudo = dataLaudo;
             Atividades = atividades;
             Endereco = endereco;
-        }
-        // N° PROCESSO
-        public Ambos(string numeroPericia)
-        {
-            NumeroPericia = numeroPericia;
-            char numeroVara = NumeroPericia[NumeroPericia.Length - 1];
-            NumeroVara = numeroVara;
-        }
 
-        // ADD RECLAMANTES/RECLAMADAS
-        public Ambos(List<string> reclamantes, List<string> reclamadas){
             foreach(var reclamante in reclamantes) { 
                 Reclamante.Add(reclamante);
             }
             foreach(var reclamada in reclamadas) {
                 Reclamada.Add(reclamada);
             }
-        }
 
-        // ENDEREÇO
-
-        public Ambos(Endereco endereco)
-        {
-            Endereco = new Endereco(endereco.Rua, endereco.Numero, endereco.Cidade, endereco.Bairro);
-        }
-        // DATAS
-
-        public Ambos(string dataPericia, string dataLaudo)
-        {
-            DataPericia = dataPericia;
-            DataLaudo = dataLaudo;
-        }
-        // ATIVIDADES
-        public Ambos(LocalDeTrabalho atividades)
-        {
-            Atividades = new LocalDeTrabalho(atividades.Local, atividades.Paredes, atividades.Pisos, atividades.Iluminacao, atividades.Ventilacao);
-        }
-
-        // DOCUMENTOS
-        public Ambos(List<string> documentos){
             foreach(var documento in documentos) { 
                 Documentos.Add(documento);
             }
-         }
-        public void AddAnexosInsa(List<string> anexos)
-        {
-            foreach(var anexo in anexos) { 
-                
-                AnexosInsa.Add("anexo_" + anexo);
+            foreach(var anexo in anexosInsalub) { 
+                AnexosInsa.Add("anexos_" + anexo + "_insalub");
             }
+             foreach(var anexo in anexosPericu) { 
+                AnexosPericu.Add("anexos_" + anexo + "_pericu");
+             }
         }
-        public void AddAnexosPericu(List<string> anexos)
+
+        public override string ToString()
         {
-            foreach(var anexo in anexos) { 
-                
-                AnexosPericu.Add("anexo_" + anexo);
-            }
-         }
+            return $"Número Perícia: {NumeroPericia}\nData Perícia: {DataPericia}\nData Laudo: {DataLaudo}\nAtividades: {Atividades}\nEndereço: {Endereco}\nReclamantes: {string.Join(", ", Reclamante)}\nReclamadas: {string.Join(", ", Reclamada)}\nDocumentos: {string.Join(", ", Documentos)}\nAnexos Insalubridade: {string.Join(", ", AnexosInsa)}\nAnexos Periculosidade: {string.Join(", ", AnexosPericu)}";
+        }
     }
 }

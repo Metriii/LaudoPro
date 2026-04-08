@@ -12,65 +12,34 @@ namespace ApiWeb.Entities.Insalubridade
         public List<string> AnexosInsa { get; set; } = new List<string>();
 
         public Insalubridade(){}
-        public Insalubridade(string numeroPericia, string dataPericia, string dataLaudo, LocalDeTrabalho atividades, Endereco endereco) : base(numeroPericia, dataPericia, dataLaudo, atividades, endereco)
+        public Insalubridade(string numeroPericia, string dataPericia, string dataLaudo, LocalDeTrabalho atividades, Endereco endereco, List<string> reclamantes, List<string> reclamadas, List<string> documentos, List<string> anexosInsalub) : base(numeroPericia, dataPericia, dataLaudo, atividades, endereco)
         {
-            NumeroPericia = numeroPericia;
+                        NumeroPericia = numeroPericia;
             char numeroVara = NumeroPericia[NumeroPericia.Length - 1];
             NumeroVara = numeroVara;
-            DataPericia = dataPericia;
-            DataLaudo = dataLaudo;
-            Atividades = atividades;
-            Endereco = endereco;
-        }
-        // N° PROCESSO
-        public Insalubridade(string numeroPericia)
-        {
-            NumeroPericia = numeroPericia;
-            char numeroVara = NumeroPericia[NumeroPericia.Length - 1];
-            NumeroVara = numeroVara;
-        }
-
-        // ADD RECLAMANTES/RECLAMADAS
-        public Insalubridade(List<string> reclamantes, List<string> reclamadas){
             foreach(var reclamante in reclamantes) { 
                 Reclamante.Add(reclamante);
             }
             foreach(var reclamada in reclamadas) {
                 Reclamada.Add(reclamada);
             }
-        }
 
-        // ENDEREÇO
-
-        public Insalubridade(Endereco endereco)
-        {
-            Endereco = new Endereco(endereco.Rua, endereco.Numero, endereco.Cidade, endereco.Bairro);
-        }
-        // DATAS
-
-        public Insalubridade(string dataPericia, string dataLaudo)
-        {
+            Endereco = endereco;
             DataPericia = dataPericia;
             DataLaudo = dataLaudo;
-        }
-        // ATIVIDADES
-        public Insalubridade(LocalDeTrabalho atividades)
-        {
-            Atividades = new LocalDeTrabalho(atividades.Local, atividades.Paredes, atividades.Pisos, atividades.Iluminacao, atividades.Ventilacao);
-        }
+            Atividades = atividades;
 
-        // DOCUMENTOS
-        public Insalubridade(List<string> documentos){
             foreach(var documento in documentos) { 
                 Documentos.Add(documento);
             }
-         }
-        public void AddAnexos(List<string> anexos)
-        {
-            foreach(var anexo in anexos) { 
-                
-                AnexosInsa.Add("anexo_" + anexo);
+            foreach(var anexo in anexosInsalub) { 
+                AnexosInsa.Add("anexos_" + anexo + "_insalub");
             }
         }
+        public override string ToString()
+        {
+            return $"Número Perícia: {NumeroPericia}\nData Perícia: {DataPericia}\nData Laudo: {DataLaudo}\nAtividades: {Atividades}\nEndereço: {Endereco}\nReclamantes: {string.Join(", ", Reclamante)}\nReclamadas: {string.Join(", ", Reclamada)}\nDocumentos: {string.Join(", ", Documentos)}\nAnexos Insalubridade: {string.Join(", ", AnexosInsa)}";
+        }
+               
     }
 }

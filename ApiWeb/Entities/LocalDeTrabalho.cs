@@ -16,5 +16,10 @@ namespace ApiWeb.Entities.Corpo
             Iluminacao = iluminacao;
             Ventilacao = ventilacao;
         }
+
+        public override string ToString()
+        {
+            return $"Local: {Local}, Paredes: {Paredes}, Pisos: {Pisos}, Iluminação: {Iluminacao}, Ventilação: {Ventilacao}";
+        }
     }
 }

@@ -9,69 +9,37 @@ namespace ApiWeb.Entities.Periculosidade
 {
     internal class Periculosidade : CorpoLaudo
     {
-        public List<string> AnexosPericu { get; set; } = new List<string>();
+        protected List<string> AnexosPericu { get; set; } = new List<string>();
 
         public Periculosidade(){}
-        public Periculosidade(string numeroPericia, string dataPericia, string dataLaudo, LocalDeTrabalho atividades, Endereco endereco) : base(numeroPericia, dataPericia, dataLaudo, atividades, endereco)
+        public Periculosidade(string numeroPericia, string dataPericia, string dataLaudo, LocalDeTrabalho atividades, Endereco endereco, List<string> reclamantes, List<string> reclamadas, List<string> documentos, List<string> anexosPericu) : base(numeroPericia, dataPericia, dataLaudo, atividades, endereco)
         {
             NumeroPericia = numeroPericia;
             char numeroVara = NumeroPericia[NumeroPericia.Length - 1];
             NumeroVara = numeroVara;
-            DataPericia = dataPericia;
-            DataLaudo = dataLaudo;
-            Atividades = atividades;
-            Endereco = endereco;
-        }
-        // N° PROCESSO
-        public Periculosidade(string numeroPericia)
-        {
-            NumeroPericia = numeroPericia;
-            char numeroVara = NumeroPericia[NumeroPericia.Length - 1];
-            NumeroVara = numeroVara;
-        }
-
-        // ADD RECLAMANTES/RECLAMADAS
-        public Periculosidade(List<string> reclamantes, List<string> reclamadas){
             foreach(var reclamante in reclamantes) { 
                 Reclamante.Add(reclamante);
             }
             foreach(var reclamada in reclamadas) {
                 Reclamada.Add(reclamada);
             }
-        }
 
-        // ENDEREÇO
-
-        public Periculosidade(Endereco endereco)
-        {
-            Endereco = new Endereco(endereco.Rua, endereco.Numero, endereco.Cidade, endereco.Bairro);
-        }
-        // DATAS
-
-        public Periculosidade(string dataPericia, string dataLaudo)
-        {
+            Endereco = endereco;
             DataPericia = dataPericia;
             DataLaudo = dataLaudo;
-        }
-        // ATIVIDADES
-        public Periculosidade(LocalDeTrabalho atividades)
-        {
-            Atividades = new LocalDeTrabalho(atividades.Local, atividades.Paredes, atividades.Pisos, atividades.Iluminacao, atividades.Ventilacao);
-        }
+            Atividades = atividades;
 
-        // DOCUMENTOS
-        public Periculosidade(List<string> documentos){
             foreach(var documento in documentos) { 
                 Documentos.Add(documento);
             }
-         }
-        public void AddAnexos(List<string> anexos)
-        {
-            foreach(var anexo in anexos) { 
-                
-                AnexosPericu.Add("anexo_" + anexo);
+            foreach(var anexo in anexosPericu) { 
+                AnexosPericu.Add("anexos_" + anexo + "_pericu");
             }
+            
         }
- 
+        public override string ToString()
+        {
+            return $"Número Perícia: {NumeroPericia}\nData Perícia: {DataPericia}\nData Laudo: {DataLaudo}\nAtividades: {Atividades}\nEndereço: {Endereco}\nReclamantes: {string.Join(", ", Reclamante)}\nReclamadas: {string.Join(", ", Reclamada)}\nDocumentos: {string.Join(", ", Documentos)}\nAnexos Periculosidade: {string.Join(", ", AnexosPericu)}";
+        }
     }
 }
