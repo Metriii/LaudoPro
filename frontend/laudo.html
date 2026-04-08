@@ -36,159 +36,206 @@
 
 
       <!--==========================
-             PERICULOSIDADE
+          PERICULOSIDADE
       ============================-->
-      <div id="periculosidade" class="conteudo" style="display:block;">
-        <input type="text" id="numero-processo" placeholder="N° do Processo">
-        <div id="lista-reclamantes-peric">
-          <div class="campo">
-            <input type="text" placeholder="Reclamante">
-            <button type="button" onclick="adicionarReclamante('lista-reclamantes-peric')">+</button>
-            <button type="button" onclick="removerReclamante(this)">-</button>
-          </div>
-        </div>
+<div id="periculosidade" class="conteudo" style="display:block;">
 
-        <div id="lista-reclamadas-peric">
-          <div class="campo">
-            <input type="text" placeholder="Reclamada">
-            <button type="button" onclick="adicionarCampo('lista-reclamadas-peric')">+</button>
-            <button type="button" onclick="removerCampo(this)">-</button>
-          </div>
-        </div>
+  <input type="text" id="numero-processo-peric" placeholder="N° do Processo">
 
-        <hr class="linha">
-        <div id="container-peric"></div>
-        <div id="container-documentos-peric"></div>
+  <div id="lista-reclamantes-peric">
+    <div class="campo">
+      <input type="text" placeholder="Reclamante">
+      <button type="button" onclick="adicionarReclamante('lista-reclamantes-peric')">+</button>
+      <button type="button" onclick="removerReclamante(this)">-</button>
+    </div>
+  </div>
 
-        <hr class="linha">
-        <div class="endereco">
-          <input type="text" id="rua" placeholder="Rua">
-          <input type="text" id="numero" placeholder="Número">
-          <input type="text" id="bairro" placeholder="Bairro">
-          <input type="text" id="cidade" placeholder="Cidade">
-        </div>
+  <div id="lista-reclamadas-peric">
+    <div class="campo">
+      <input type="text" placeholder="Reclamada">
+      <button type="button" onclick="adicionarCampo('lista-reclamadas-peric')">+</button>
+      <button type="button" onclick="removerCampo(this)">-</button>
+    </div>
+  </div>
 
-        <hr class="linha">
-        <div class="local-trabalho">
-          <input type="text" id="local" placeholder="Local de Trabalho">
-          <input type="text" id="paredes" placeholder="Paredes">
-          <input type="text" id="pisos" placeholder="Pisos">
-          <input type="text" id="iluminacao" placeholder="Iluminação">
-          <input type="text" id="ventilacao" placeholder="Ventilação">
-        </div>
+  <hr class="linha">
 
-        <hr class="linha">
-        <div>
-          <input type="text" id="data-pericia" placeholder="Data Perícia" onfocus="this.type='date'"onblur="if(!this.value)this.type='text'">
-          <input type="text" id="data-laudo" placeholder="Data Laudo" onfocus="this.type='date'"onblur="if(!this.value)this.type='text'">        
-        </div>
+  <div id="container-peric"></div>
+  <div id="container-documentos-peric"></div>
 
-        <div class="salvar-area">
-          <button class="salvar" onclick="enviarPericulosidade()">
-            Salvar
-          </button>
-        </div>
-      </div>
+  <hr class="linha">
 
-      <!--==========================
-             INSALUBRIDADE
-      ============================-->
-      <div id="insalubridade" class="conteudo">
-        <input type="text" placeholder="N° do Processo">
-        <div id="lista-reclamantes-insalub">
-          <div class="campo">
-            <input type="text" placeholder="Reclamante">
-            <button type="button" onclick="adicionarReclamante('lista-reclamantes-insalub')">+</button>
-            <button type="button" onclick="removerReclamante(this)">-</button>
-          </div>
-        </div>
+  <div class="endereco">
+    <input type="text" id="rua-peric" placeholder="Rua">
+    <input type="text" id="numero-peric" placeholder="Número">
+    <input type="text" id="bairro-peric" placeholder="Bairro">
+    <input type="text" id="cidade-peric" placeholder="Cidade">
+  </div>
 
-        <div id="lista-reclamadas-insalub">
-          <div class="campo">
-            <input type="text" placeholder="Reclamada">
-            <button type="button" onclick="adicionarCampo('lista-reclamadas-insalub')">+</button>
-            <button type="button" onclick="removerCampo(this)">-</button>
-          </div>
-        </div>
+  <hr class="linha">
 
-        <hr class="linha">
-        <div id="container-insalub"></div>
-        <div id="container-documentos-insalub"></div>
+  <div class="local-trabalho">
+    <input type="text" id="local-peric" placeholder="Local de Trabalho">
+    <input type="text" id="paredes-peric" placeholder="Paredes">
+    <input type="text" id="pisos-peric" placeholder="Pisos">
+    <input type="text" id="iluminacao-peric" placeholder="Iluminação">
+    <input type="text" id="ventilacao-peric" placeholder="Ventilação">
+  </div>
 
-        <hr class="linha">
-        <div class="endereco">
-          <input type="text" placeholder="Rua">
-          <input type="text" placeholder="Número">
-          <input type="text" placeholder="Bairro">
-          <input type="text" placeholder="Cidade">
-        </div>
+  <hr class="linha">
 
-        <hr class="linha">
-        <div class="local-trabalho">
-          <input type="text" id="local" placeholder="Local de Trabalho">
-          <input type="text" id="paredes" placeholder="Paredes">
-          <input type="text" id="pisos" placeholder="Pisos">
-          <input type="text" id="iluminacao" placeholder="Iluminação">
-          <input type="text" id="ventilacao" placeholder="Ventilação">
-        </div>
+  <div>
+    <input type="text" id="data-pericia-peric" placeholder="Data Perícia"
+      onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+    
+    <input type="text" id="data-laudo-peric" placeholder="Data Laudo"
+      onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+  </div>
 
-        <hr class="linha">
-        <div>
-          <input type="text" placeholder="Data Perícia" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
-          <input type="text" placeholder="Data Laudo" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
-        </div>
-      </div>
+  <div class="salvar-area">
+    <button class="salvar" onclick="enviarPericulosidade()">
+      Salvar
+    </button>
+  </div>
+</div>
 
+<!--==========================
+          INSALUBRIDADE
+============================-->
+<div id="insalubridade" class="conteudo" style="display:none;">
+
+  <input type="text" id="numero-processo-insalub" placeholder="N° do Processo">
+
+  <div id="lista-reclamantes-insalub">
+    <div class="campo">
+      <input type="text" placeholder="Reclamante">
+      <button type="button" onclick="adicionarReclamante('lista-reclamantes-insalub')">+</button>
+      <button type="button" onclick="removerReclamante(this)">-</button>
+    </div>
+  </div>
+
+  <div id="lista-reclamadas-insalub">
+    <div class="campo">
+      <input type="text" placeholder="Reclamada">
+      <button type="button" onclick="adicionarCampo('lista-reclamadas-insalub')">+</button>
+      <button type="button" onclick="removerCampo(this)">-</button>
+    </div>
+  </div>
+
+  <hr class="linha">
+
+  <div id="container-insalub"></div>
+  <div id="container-documentos-insalub"></div>
+
+  <hr class="linha">
+
+  <div class="endereco">
+    <input type="text" id="rua-insalub" placeholder="Rua">
+    <input type="text" id="numero-insalub" placeholder="Número">
+    <input type="text" id="bairro-insalub" placeholder="Bairro">
+    <input type="text" id="cidade-insalub" placeholder="Cidade">
+  </div>
+
+  <hr class="linha">
+
+  <div class="local-trabalho">
+    <input type="text" id="local-insalub" placeholder="Local de Trabalho">
+    <input type="text" id="paredes-insalub" placeholder="Paredes">
+    <input type="text" id="pisos-insalub" placeholder="Pisos">
+    <input type="text" id="iluminacao-insalub" placeholder="Iluminação">
+    <input type="text" id="ventilacao-insalub" placeholder="Ventilação">
+  </div>
+
+  <hr class="linha">
+
+  <div>
+    <input type="text" id="data-pericia-insalub" placeholder="Data Perícia"
+      onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+    
+    <input type="text" id="data-laudo-insalub" placeholder="Data Laudo"
+      onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+  </div>
+
+  <div class="salvar-area">
+    <button class="salvar" onclick="enviarInsalubridade()">
+      Salvar
+    </button>
+  </div>
+</div>
       <!--==========================
          PERICULOSIDADE / INSALUBRIDADE
       ============================-->
-      <div id="periculosidade-insalubridade" class="conteudo">
-        <input type="text" id="numero-processo" placeholder="N° do Processo">
+      <!--==========================
+   PERICULOSIDADE + INSALUBRIDADE (AMBOS)
+============================-->
+<div id="periculosidade-insalubridade" class="conteudo" style="display:none;">
 
-        <div id="lista-reclamantes-ambos">
-          <div class="campo">
-            <input type="text" placeholder="Reclamante">
-            <button type="button" onclick="adicionarReclamante('lista-reclamantes-ambos')">+</button>
-            <button type="button" onclick="removerReclamante(this)">-</button>
-          </div>
-        </div>
+  <input type="text" id="numero-processo-ambos" placeholder="N° do Processo">
 
-        <div id="lista-reclamadas-ambos">
-          <div class="campo">
-            <input type="text" placeholder="Reclamada">
-            <button type="button" onclick="adicionarCampo('lista-reclamadas-ambos')">+</button>
-            <button type="button" onclick="removerCampo(this)">-</button>
-          </div>
-        </div>
+  <!-- RECLAMANTES -->
+  <div id="lista-reclamantes-ambos">
+    <div class="campo">
+      <input type="text" placeholder="Reclamante">
+      <button type="button" onclick="adicionarReclamante('lista-reclamantes-ambos')">+</button>
+      <button type="button" onclick="removerReclamante(this)">-</button>
+    </div>
+  </div>
 
-        <hr class="linha">
-        <div id="container-ambos-peric"></div>
-        <div id="container-ambos-insalub"></div>
-        <div id="container-documentos-ambos"></div>
+  <!-- RECLAMADAS -->
+  <div id="lista-reclamadas-ambos">
+    <div class="campo">
+      <input type="text" placeholder="Reclamada">
+      <button type="button" onclick="adicionarCampo('lista-reclamadas-ambos')">+</button>
+      <button type="button" onclick="removerCampo(this)">-</button>
+    </div>
+  </div>
 
-        <hr class="linha">
-        <div class="endereco">
-          <input type="text" placeholder="Rua">
-          <input type="text" placeholder="Número">
-          <input type="text" placeholder="Bairro">
-          <input type="text" placeholder="Cidade">
-        </div>
+  <hr class="linha">
 
-        <hr class="linha">
-        <div class="local-trabalho">
-          <input type="text" id="local" placeholder="Local de Trabalho">
-          <input type="text" id="paredes" placeholder="Paredes">
-          <input type="text" id="pisos" placeholder="Pisos">
-          <input type="text" id="iluminacao" placeholder="Iluminação">
-          <input type="text" id="ventilacao" placeholder="Ventilação">
-        </div>
+  <!-- ANEXOS / DOCUMENTOS -->
+  <div id="container-ambos-peric"></div>
+  <div id="container-ambos-insalub"></div>
+  <div id="container-documentos-ambos"></div>
 
-        <hr class="linha">
-        <div>
-          <input type="text" placeholder="Data Perícia" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
-          <input type="text" placeholder="Data Laudo" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
-        </div>
-      </div>
+  <hr class="linha">
+
+  <!-- ENDEREÇO -->
+  <div class="endereco">
+    <input type="text" id="rua-ambos" placeholder="Rua">
+    <input type="text" id="numero-ambos" placeholder="Número">
+    <input type="text" id="bairro-ambos" placeholder="Bairro">
+    <input type="text" id="cidade-ambos" placeholder="Cidade">
+  </div>
+
+  <hr class="linha">
+
+  <!-- LOCAL DE TRABALHO -->
+  <div class="local-trabalho">
+    <input type="text" id="local-ambos" placeholder="Local de Trabalho">
+    <input type="text" id="paredes-ambos" placeholder="Paredes">
+    <input type="text" id="pisos-ambos" placeholder="Pisos">
+    <input type="text" id="iluminacao-ambos" placeholder="Iluminação">
+    <input type="text" id="ventilacao-ambos" placeholder="Ventilação">
+  </div>
+
+  <hr class="linha">
+
+  <!-- DATAS -->
+  <div>
+    <input type="text" id="data-pericia-ambos" placeholder="Data Perícia"
+           onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+
+    <input type="text" id="data-laudo-ambos" placeholder="Data Laudo"
+           onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+  </div>
+
+  <div class="salvar-area">
+    <button class="salvar" onclick="enviarAmbos()">
+      Salvar
+    </button>
+  </div>
+
+</div>
 
 
   </div>
@@ -378,28 +425,6 @@ function pegarTipo(botao) {
   botao.classList.add("active");
 }
 
-// função chamada no botão salvar
-async function enviarLaudo() {
-  if (!tipoSelecionado) {
-    alert("Selecione um tipo antes de salvar!");
-    return;
-  }
-
-  try {
-    await fetch('http://localhost:5000/api/laudos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tipo: tipoSelecionado })
-    });
-
-    console.log("Laudo enviado:", tipoSelecionado);
-
-  } catch (erro) {
-    console.error("Erro ao enviar laudo:", erro);
-  }
-}
-
-
 function pegarLista(idContainer) {
   const inputs = document.querySelectorAll(`#${idContainer} input`);
   const lista = [];
@@ -412,24 +437,6 @@ function pegarLista(idContainer) {
 
   return lista;
 }
-
-async function enviarListaReclamantes() {
-  const lista = pegarLista("lista-reclamantes-peric");
-
-  try {
-    await fetch('http://localhost:5000/api/reclamantes', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(lista)
-    });
-
-    console.log("Enviado:", lista);
-
-  } catch (erro) {
-    console.error("Erro:", erro);
-  }
-}
-
 function pegarListaReclamada(idContainer) {
   const inputs = document.querySelectorAll(`#${idContainer} input`);
   const lista = [];
@@ -441,22 +448,6 @@ function pegarListaReclamada(idContainer) {
   });
 
   return lista;
-}
-async function enviarListaReclamada() {
-  const lista = pegarListaReclamada("lista-reclamadas-peric"); // ID do container de inputs da reclamada
-
-  try {
-    await fetch('http://localhost:5000/api/reclamadas', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(lista)
-    });
-
-    console.log("Lista da reclamada enviada:", lista);
-
-  } catch (erro) {
-    console.error("Erro ao enviar lista da reclamada:", erro);
-  }
 }
 
 function pegarListaAnexos(idContainer) {
@@ -472,25 +463,6 @@ function pegarListaAnexos(idContainer) {
   return lista;
 }
 
-async function enviarListaAnexos() {
-  const lista = pegarListaAnexos("container-peric");
-
-  console.log("Anexos:", lista); // 👈 TESTE IMPORTANTE
-
-  try {
-    await fetch('http://localhost:5000/api/anexos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(lista)
-    });
-
-    console.log("Anexos enviados:", lista);
-
-  } catch (erro) {
-    console.error("Erro:", erro);
-  }
-}
-
 function pegarListaDocumentos(idContainer) {
   const selects = document.querySelectorAll(`#${idContainer} select`);
   const lista = [];
@@ -504,45 +476,11 @@ function pegarListaDocumentos(idContainer) {
   return lista;
 }
 
-async function enviarListaDocumentos() {
-  const lista = pegarListaDocumentos("container-documentos-peric");
-
-  console.log("Documentos:", lista); // 👈 TESTE IMPORTANTE
-
-  try {
-    await fetch('http://localhost:5000/api/documentos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(lista)
-    });
-
-    console.log("Documentos enviados:", lista);
-
-  } catch (erro) {
-    console.error("Erro:", erro);
-  }
-}
-
 function pegarNumeroProcesso() {
   const input = document.getElementById("numero-processo");
   return input.value.trim();
 }
-async function enviarNumeroProcesso() {
-  const numero = pegarNumeroProcesso();
 
-  try {
-    await fetch('http://localhost:5000/api/processo', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(numero)    
-    });
-
-    console.log("Número do processo enviado:", numero);
-
-  } catch (erro) {
-    console.error("Erro:", erro);
-  }
-}
 function pegarLocalTrabalho() {
   return {
     local: document.getElementById("local").value.trim(),
@@ -552,19 +490,6 @@ function pegarLocalTrabalho() {
     ventilacao: document.getElementById("ventilacao").value.trim()
   };
 }
-
-async function enviarLocalTrabalho() {
-  const dados = pegarLocalTrabalho();
-
-  console.log("Enviando:", dados);
-
-  await fetch('http://localhost:5000/api/local-trabalho', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dados)
-  });
-}
-
 function pegarEndereco() {
   return {
     rua: document.getElementById("rua").value.trim(),
@@ -573,105 +498,146 @@ function pegarEndereco() {
     cidade: document.getElementById("cidade").value.trim()
   };
 }
-
-async function enviarEndereco() {
-  const dados = pegarEndereco();
-
-  console.log("ENVIANDO:", dados); // 👈 ESSENCIAL
-
-  try {
-    const response = await fetch('http://localhost:5000/api/endereco', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dados)
-    });
-
-    console.log("STATUS:", response.status);
-
-  } catch (erro) {
-    console.error("Erro:", erro);
-  }
-}
-
-async function enviarDataLaudo() {
-  const input = document.getElementById("data-laudo");
-  const data = input.value;
-
-  // yyyy-MM-dd → dd/MM/yyyy
-  const [ano, mes, dia] = data.split("-");
-  const dataFormatada = `${dia}/${mes}/${ano}`;
-
-  try {
-    await fetch('http://localhost:5000/api/data-laudo', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dataFormatada)
-    });
-
-  } catch (erro) {
-    console.error("Erro:", erro);
-  }
-}
-async function enviarDataPericia() {
-  const input = document.getElementById("data-pericia");
-  const data = input.value;
-  // yyyy-MM-dd → dd/MM/yyyy
-  const [ano, mes, dia] = data.split("-");
-  const dataFormatada = `${dia}/${mes}/${ano}`;
-  try {
-    await fetch('http://localhost:5000/api/data-pericia', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dataFormatada)
-    });
-
-  } catch (erro) {
-    console.error("Erro:", erro);
-  }
+function formatarData(idCampo) {
+  const valor = document.getElementById(idCampo).value;
+  if (!valor) return "";
+  
+  const [ano, mes, dia] = valor.split("-");
+  return `${dia}/${mes}/${ano}`;
 }
 
 async function enviarPericulosidade() {
   try {
-const dados = {
-  tipo: tipoSelecionado,
-  numeroPericia: pegarNumeroProcesso(),
+    const dados = {
+      tipo: tipoSelecionado,
+      numeroPericia: document.getElementById("numero-processo-peric").value,
 
-  reclamantes: pegarLista("lista-reclamantes-peric"),
-  reclamadas: pegarLista("lista-reclamadas-peric"),
-  anexos: pegarListaAnexos("container-peric"),
-  documentos: pegarListaDocumentos("container-documentos-peric"),
+      reclamantes: pegarLista("lista-reclamantes-peric"),
+      reclamadas: pegarLista("lista-reclamadas-peric"),
+      anexos: pegarListaAnexos("container-peric"),
+      documentos: pegarListaDocumentos("container-documentos-peric"),
 
-  localTrabalho: pegarLocalTrabalho(),
-  endereco: pegarEndereco(),
+      localTrabalho: {
+        local: document.getElementById("local-peric").value,
+        paredes: document.getElementById("paredes-peric").value,
+        pisos: document.getElementById("pisos-peric").value,
+        iluminacao: document.getElementById("iluminacao-peric").value,
+        ventilacao: document.getElementById("ventilacao-peric").value
+      },
 
-  dataLaudo: (() => {
-    const data = document.getElementById("data-laudo").value;
-    if (!data) return "";
-    const [ano, mes, dia] = data.split("-");
-    return `${dia}/${mes}/${ano}`;
-  })(),
+      endereco: {
+        rua: document.getElementById("rua-peric").value,
+        numero: document.getElementById("numero-peric").value,
+        bairro: document.getElementById("bairro-peric").value,
+        cidade: document.getElementById("cidade-peric").value
+      },
 
-  dataPericia: (() => {
-    const data = document.getElementById("data-pericia").value;
-    if (!data) return "";
-    const [ano, mes, dia] = data.split("-");
-    return `${dia}/${mes}/${ano}`;
-  })()
-};
+      dataLaudo: formatarData("data-laudo-peric"),
+      dataPericia: formatarData("data-pericia-peric")
+    };
 
-    console.log("Enviando tudo:", dados);
+    console.log("Enviando PERICULOSIDADE:", dados);
 
-    await fetch('http://localhost:5000/api/laudo-completo', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    await fetch("http://localhost:5000/api/laudo-pericu", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dados)
     });
 
   } catch (erro) {
-    console.error("Erro geral:", erro);
+    console.error("ERRO PERICULOSIDADE:", erro);
   }
 }
 
+async function enviarInsalubridade() {
+  try {
+    const dados = {
+      tipo: tipoSelecionado,
+      numeroPericia: document.getElementById("numero-processo-insalub").value,
+
+      reclamantes: pegarLista("lista-reclamantes-insalub"),
+      reclamadas: pegarLista("lista-reclamadas-insalub"),
+      anexos: pegarListaAnexos("container-insalub"),
+      documentos: pegarListaDocumentos("container-documentos-insalub"),
+
+      localTrabalho: {
+        local: document.getElementById("local-insalub").value,
+        paredes: document.getElementById("paredes-insalub").value,
+        pisos: document.getElementById("pisos-insalub").value,
+        iluminacao: document.getElementById("iluminacao-insalub").value,
+        ventilacao: document.getElementById("ventilacao-insalub").value
+      },
+
+      endereco: {
+        rua: document.getElementById("rua-insalub").value,
+        numero: document.getElementById("numero-insalub").value,
+        bairro: document.getElementById("bairro-insalub").value,
+        cidade: document.getElementById("cidade-insalub").value
+      },
+
+      dataLaudo: formatarData("data-laudo-insalub"),
+      dataPericia: formatarData("data-pericia-insalub")
+    };
+
+    console.log("Enviando INSALUBRIDADE:", dados);
+
+    await fetch("http://localhost:5000/api/laudo-insalub", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados)
+    });
+
+  } catch (erro) {
+    console.error("ERRO INSALUBRIDADE:", erro);
+  }
+}
+
+async function enviarAmbos() {
+  try {
+    const dados = {
+      tipo: tipoSelecionado,
+
+      numeroPericia: document.getElementById("numero-processo-ambos").value,
+
+      reclamantes: pegarLista("lista-reclamantes-ambos"),
+      reclamadas: pegarLista("lista-reclamadas-ambos"),
+
+      anexosPericulosidade: pegarListaAnexos("container-ambos-peric"),
+      anexosInsalubridade: pegarListaAnexos("container-ambos-insalub"),
+
+      documentos: pegarListaDocumentos("container-documentos-ambos"),
+
+      endereco: {
+        rua: document.getElementById("rua-ambos").value,
+        numero: document.getElementById("numero-ambos").value,
+        bairro: document.getElementById("bairro-ambos").value,
+        cidade: document.getElementById("cidade-ambos").value
+      },
+
+      localTrabalho: {
+        local: document.getElementById("local-ambos").value,
+        paredes: document.getElementById("paredes-ambos").value,
+        pisos: document.getElementById("pisos-ambos").value,
+        iluminacao: document.getElementById("iluminacao-ambos").value,
+        ventilacao: document.getElementById("ventilacao-ambos").value
+      },
+
+      dataPericia: formatarData("data-pericia-ambos"),
+      dataLaudo: formatarData("data-laudo-ambos")
+    };
+
+    console.log("ENVIANDO AMBOS:", dados);
+
+    await fetch("http://localhost:5000/api/laudo-ambos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados)
+    });
+
+  } catch (erro) {
+    console.error("ERRO AO ENVIAR AMBOS:", erro);
+  }
+}
 
 
 

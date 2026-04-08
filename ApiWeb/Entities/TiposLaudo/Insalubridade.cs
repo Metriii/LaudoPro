@@ -1,37 +1,29 @@
+using ApiWeb.Entities.Corpo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiWeb.Entities.Corpo
+namespace ApiWeb.Entities.Insalubridade
 {
-    internal class CorpoLaudo
+    internal class Insalubridade : CorpoLaudo
     {
-        protected string? NumeroPericia {  get; set; }
-        protected char? NumeroVara { get; set; }
-        protected List<string> Reclamante { get; set; } = new List<string>();
-        protected List<string> Reclamada { get; set; } = new List<string>();
-        protected Endereco? Endereco { get; set; }
-        protected string? DataPericia { get; set; }
-        protected string? DataLaudo { get; set; }
-        protected LocalDeTrabalho? Atividades { get; set; }
-        protected List<string>? Documentos {get; set; } = new List<string>();
+        public List<string> AnexosInsa { get; set; } = new List<string>();
 
-        public CorpoLaudo() { }
-
-        public CorpoLaudo(string numeroPericia, string dataPericia, string dataLaudo, LocalDeTrabalho atividades, Endereco endereco)
+        public Insalubridade(){}
+        public Insalubridade(string numeroPericia, string dataPericia, string dataLaudo, LocalDeTrabalho atividades, Endereco endereco) : base(numeroPericia, dataPericia, dataLaudo, atividades, endereco)
         {
             NumeroPericia = numeroPericia;
-            NumeroVara = NumeroPericia[NumeroPericia.Length - 1];
+            char numeroVara = NumeroPericia[NumeroPericia.Length - 1];
+            NumeroVara = numeroVara;
             DataPericia = dataPericia;
             DataLaudo = dataLaudo;
             Atividades = atividades;
             Endereco = endereco;
-
         }
-        //N° PROCESSO
-        public CorpoLaudo(string numeroPericia)
+        // N° PROCESSO
+        public Insalubridade(string numeroPericia)
         {
             NumeroPericia = numeroPericia;
             char numeroVara = NumeroPericia[NumeroPericia.Length - 1];
@@ -39,7 +31,7 @@ namespace ApiWeb.Entities.Corpo
         }
 
         // ADD RECLAMANTES/RECLAMADAS
-        public CorpoLaudo(List<string> reclamantes, List<string> reclamadas){
+        public Insalubridade(List<string> reclamantes, List<string> reclamadas){
             foreach(var reclamante in reclamantes) { 
                 Reclamante.Add(reclamante);
             }
@@ -50,29 +42,35 @@ namespace ApiWeb.Entities.Corpo
 
         // ENDEREÇO
 
-        public CorpoLaudo(Endereco endereco)
+        public Insalubridade(Endereco endereco)
         {
             Endereco = new Endereco(endereco.Rua, endereco.Numero, endereco.Cidade, endereco.Bairro);
         }
         // DATAS
 
-        public CorpoLaudo(string dataPericia, string dataLaudo)
+        public Insalubridade(string dataPericia, string dataLaudo)
         {
             DataPericia = dataPericia;
             DataLaudo = dataLaudo;
         }
         // ATIVIDADES
-        public CorpoLaudo(LocalDeTrabalho atividades)
+        public Insalubridade(LocalDeTrabalho atividades)
         {
             Atividades = new LocalDeTrabalho(atividades.Local, atividades.Paredes, atividades.Pisos, atividades.Iluminacao, atividades.Ventilacao);
         }
 
         // DOCUMENTOS
-        public CorpoLaudo(List<string> documentos){
+        public Insalubridade(List<string> documentos){
             foreach(var documento in documentos) { 
                 Documentos.Add(documento);
             }
          }
-
+        public void AddAnexos(List<string> anexos)
+        {
+            foreach(var anexo in anexos) { 
+                
+                AnexosInsa.Add("anexo_" + anexo);
+            }
+        }
     }
 }
