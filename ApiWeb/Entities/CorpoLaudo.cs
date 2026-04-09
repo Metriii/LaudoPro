@@ -8,15 +8,20 @@ namespace ApiWeb.Entities.Corpo
 {
     internal class CorpoLaudo
     {
-        protected string? NumeroPericia {  get; set; } = "";
-        protected char? NumeroVara { get; set; }
-        protected List<string> Reclamante { get; set; } = new List<string>();
-        protected List<string> Reclamada { get; set; } = new List<string>();
-        protected Endereco? Endereco { get; set; }
-        protected string? DataPericia { get; set; }
-        protected string? DataLaudo { get; set; }
-        protected LocalDeTrabalho? Atividades { get; set; }
-        protected List<string> Documentos {get; set; } = new List<string>();
+        public string? NumeroPericia { get; protected set; } = "";
+        public char? NumeroVara { get; protected set; }
+
+        public List<string> Reclamante { get; protected set; } = new List<string>();
+        public List<string> Reclamada { get; protected set; } = new List<string>();
+
+        public Endereco? Endereco { get; protected set; }
+
+        public string? DataPericia { get; protected set; }
+        public string? DataLaudo { get; protected set; }
+
+        public LocalDeTrabalho? Atividades { get; protected set; }
+
+        public List<string> Documentos { get; protected set; } = new List<string>();
 
         public CorpoLaudo() { }
 

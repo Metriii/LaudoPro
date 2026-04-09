@@ -6,12 +6,15 @@ C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\ApiWeb.deps.json
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\ApiWeb.runtimeconfig.json
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\ApiWeb.dll
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\ApiWeb.pdb
+C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\DocumentFormat.OpenXml.dll
+C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\DocumentFormat.OpenXml.Framework.dll
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\Microsoft.Data.Sqlite.dll
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\Microsoft.OpenApi.dll
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\SQLitePCLRaw.batteries_v2.dll
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\SQLitePCLRaw.core.dll
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\SQLitePCLRaw.provider.e_sqlite3.dll
+C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\System.IO.Packaging.dll
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\runtimes\browser-wasm\nativeassets\net9.0\e_sqlite3.a
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\runtimes\linux-arm\native\libe_sqlite3.so
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\runtimes\linux-arm64\native\libe_sqlite3.so
@@ -59,3 +62,4 @@ C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\obj\Debug\net10.0\refint\ApiWeb.dll
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\obj\Debug\net10.0\ApiWeb.pdb
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\obj\Debug\net10.0\ApiWeb.genruntimeconfig.cache
 C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\obj\Debug\net10.0\ref\ApiWeb.dll
+C:\Users\vinic\LaudoPro\LaudoPro\ApiWeb\bin\Debug\net10.0\Modelos\ESQUELETO.docx

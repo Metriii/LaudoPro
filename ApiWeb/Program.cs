@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using ApiWeb.Entities.Insalubridade;
 using ApiWeb.Entities.Periculosidade;
-using System.Collections.Generic;
 using ApiWeb.Entities.Corpo;
 using ApiWeb.Entities.Ambos;
+using ApiWeb.Services.PericulosidadeServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -87,6 +87,8 @@ string numeroPericia = root.TryGetProperty("numeroPericia", out var n)? n.GetStr
 
     Periculosidade periculo = new Periculosidade(numeroPericia, dataPericia, dataLaudo, new LocalDeTrabalho(localAtividade, paredes, pisos, iluminacao, ventilacao), new Endereco(rua, numero, cidade, bairro), reclamantes, reclamadas, documentos, anexosPericu);
     System.Console.WriteLine(periculo);
+    var service = new PericulosidadeServices();
+    service.GerarDocumentoPericulosidade(periculo);
     return Results.Ok();
 });
 

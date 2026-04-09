@@ -9,9 +9,10 @@ namespace ApiWeb.Entities.Periculosidade
 {
     internal class Periculosidade : CorpoLaudo
     {
-        protected List<string> AnexosPericu { get; set; } = new List<string>();
+        public List<string> AnexosPericu {  get; protected set; } = new List<string>();
 
         public Periculosidade(){}
+        public Periculosidade(string numeroPericia) : base(numeroPericia) { }
         public Periculosidade(string numeroPericia, string dataPericia, string dataLaudo, LocalDeTrabalho atividades, Endereco endereco, List<string> reclamantes, List<string> reclamadas, List<string> documentos, List<string> anexosPericu) : base(numeroPericia, dataPericia, dataLaudo, atividades, endereco)
         {
             NumeroPericia = numeroPericia;
@@ -37,6 +38,7 @@ namespace ApiWeb.Entities.Periculosidade
             }
             
         }
+
         public override string ToString()
         {
             return $"Número Perícia: {NumeroPericia}\nData Perícia: {DataPericia}\nData Laudo: {DataLaudo}\nAtividades: {Atividades}\nEndereço: {Endereco}\nReclamantes: {string.Join(", ", Reclamante)}\nReclamadas: {string.Join(", ", Reclamada)}\nDocumentos: {string.Join(", ", Documentos)}\nAnexos Periculosidade: {string.Join(", ", AnexosPericu)}";
