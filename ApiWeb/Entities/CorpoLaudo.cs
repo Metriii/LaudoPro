@@ -8,7 +8,7 @@ namespace ApiWeb.Entities.Corpo
 {
     internal class CorpoLaudo
     {
-        public string? NumeroPericia { get; protected set; } = "";
+        public string NumeroPericia { get; protected set; } = "";
         public char? NumeroVara { get; protected set; }
 
         public List<string> Reclamante { get; protected set; } = new List<string>();

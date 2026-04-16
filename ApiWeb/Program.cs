@@ -87,9 +87,17 @@ string numeroPericia = root.TryGetProperty("numeroPericia", out var n)? n.GetStr
 
     Periculosidade periculo = new Periculosidade(numeroPericia, dataPericia, dataLaudo, new LocalDeTrabalho(localAtividade, paredes, pisos, iluminacao, ventilacao), new Endereco(rua, numero, cidade, bairro), reclamantes, reclamadas, documentos, anexosPericu);
     System.Console.WriteLine(periculo);
+
+     if (string.IsNullOrEmpty(periculo.NumeroPericia))
+    {
+        return Results.BadRequest("NumeroPericia é obrigatório.");
+    }
+    System.Console.WriteLine(periculo.NumeroPericia);
+
     var service = new PericulosidadeServices();
     service.GerarDocumentoPericulosidade(periculo);
-    return Results.Ok();
+
+    return Results.Ok( );
 });
 
 

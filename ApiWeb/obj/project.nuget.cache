@@ -1,20 +1,25 @@
 {
   "version": 2,
-  "dgSpecHash": "/2n4L7SE/cw=",
+  "dgSpecHash": "n+rJHkRGjs98uOL1LTj7mP7KghmXv1dxH7RigQGQPWA/vIL3F4lfSi3Msq+oyTgMTIOlOczyixB/b0NHuPnLGg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vinic\\LaudoPro\\LaudoPro\\ApiWeb\\ApiWeb.csproj",
+  "projectFilePath": "/home/metri/LaudoPro/LaudoPro/ApiWeb/ApiWeb.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\vinic\\.nuget\\packages\\documentformat.openxml\\3.5.1\\documentformat.openxml.3.5.1.nupkg.sha512",
-    "C:\\Users\\vinic\\.nuget\\packages\\documentformat.openxml.framework\\3.5.1\\documentformat.openxml.framework.3.5.1.nupkg.sha512",
-    "C:\\Users\\vinic\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.5\\microsoft.aspnetcore.openapi.10.0.5.nupkg.sha512",
-    "C:\\Users\\vinic\\.nuget\\packages\\microsoft.data.sqlite\\10.0.5\\microsoft.data.sqlite.10.0.5.nupkg.sha512",
-    "C:\\Users\\vinic\\.nuget\\packages\\microsoft.data.sqlite.core\\10.0.5\\microsoft.data.sqlite.core.10.0.5.nupkg.sha512",
-    "C:\\Users\\vinic\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
-    "C:\\Users\\vinic\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.11\\sqlitepclraw.bundle_e_sqlite3.2.1.11.nupkg.sha512",
-    "C:\\Users\\vinic\\.nuget\\packages\\sqlitepclraw.core\\2.1.11\\sqlitepclraw.core.2.1.11.nupkg.sha512",
-    "C:\\Users\\vinic\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.11\\sqlitepclraw.lib.e_sqlite3.2.1.11.nupkg.sha512",
-    "C:\\Users\\vinic\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.11\\sqlitepclraw.provider.e_sqlite3.2.1.11.nupkg.sha512",
-    "C:\\Users\\vinic\\.nuget\\packages\\system.io.packaging\\10.0.2\\system.io.packaging.10.0.2.nupkg.sha512"
+    "/home/metri/.nuget/packages/documentformat.openxml/3.5.1/documentformat.openxml.3.5.1.nupkg.sha512",
+    "/home/metri/.nuget/packages/documentformat.openxml.framework/3.5.1/documentformat.openxml.framework.3.5.1.nupkg.sha512",
+    "/home/metri/.nuget/packages/docx/5.0.0/docx.5.0.0.nupkg.sha512",
+    "/home/metri/.nuget/packages/microsoft.aspnetcore.openapi/8.0.0/microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",
+    "/home/metri/.nuget/packages/microsoft.data.sqlite/8.0.0/microsoft.data.sqlite.8.0.0.nupkg.sha512",
+    "/home/metri/.nuget/packages/microsoft.data.sqlite.core/8.0.0/microsoft.data.sqlite.core.8.0.0.nupkg.sha512",
+    "/home/metri/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
+    "/home/metri/.nuget/packages/skiasharp/2.88.8/skiasharp.2.88.8.nupkg.sha512",
+    "/home/metri/.nuget/packages/skiasharp.nativeassets.macos/2.88.8/skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
+    "/home/metri/.nuget/packages/skiasharp.nativeassets.win32/2.88.8/skiasharp.nativeassets.win32.2.88.8.nupkg.sha512",
+    "/home/metri/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.6/sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
+    "/home/metri/.nuget/packages/sqlitepclraw.core/2.1.6/sqlitepclraw.core.2.1.6.nupkg.sha512",
+    "/home/metri/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.6/sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",
+    "/home/metri/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.6/sqlitepclraw.provider.e_sqlite3.2.1.6.nupkg.sha512",
+    "/home/metri/.nuget/packages/system.io.packaging/8.0.1/system.io.packaging.8.0.1.nupkg.sha512",
+    "/home/metri/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512"
   ],
   "logs": []
 }
