@@ -32,6 +32,8 @@ app.MapPost("/api/laudo-pericu", async (HttpContext context) =>
 
     Console.WriteLine("=== PERICULOSIDADE ===");
 
+string tipo = root.TryGetProperty("tipo", out var t)? t.GetString() ?? "": "";
+Console.WriteLine($"Tipo: {tipo}");
 
 string numeroPericia = root.TryGetProperty("numeroPericia", out var n)? n.GetString() ?? "": "";
     List<string> reclamantes = new List<string>();
@@ -95,7 +97,7 @@ string numeroPericia = root.TryGetProperty("numeroPericia", out var n)? n.GetStr
     System.Console.WriteLine(periculo.NumeroPericia);
 
     var service = new PericulosidadeServices();
-    service.GerarDocumentoPericulosidade(periculo);
+    service.GerarDocumentoPericulosidade(periculo, tipo);
 
     return Results.Ok( );
 });
