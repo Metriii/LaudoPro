@@ -1,5 +1,10 @@
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/appsettings.Development.json
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/appsettings.json
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_1_pericu.docx
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_2_pericu.docx
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_3_pericu.docx
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_4_pericu.docx
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_5_pericu.docx
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Modelos/ESQUELETO.docx
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ApiWeb
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ApiWeb.deps.json
@@ -8,13 +13,21 @@
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ApiWeb.pdb
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/DocumentFormat.OpenXml.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/DocumentFormat.OpenXml.Framework.dll
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Xceed.Document.NET.dll
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Xceed.Drawing.NET.dll
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Xceed.Words.NET.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Microsoft.AspNetCore.OpenApi.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Microsoft.Data.Sqlite.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Microsoft.OpenApi.dll
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/SkiaSharp.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/SQLitePCLRaw.batteries_v2.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/SQLitePCLRaw.core.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/SQLitePCLRaw.provider.e_sqlite3.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/System.IO.Packaging.dll
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/osx/native/libSkiaSharp.dylib
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/win-arm64/native/libSkiaSharp.dll
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/win-x64/native/libSkiaSharp.dll
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/win-x86/native/libSkiaSharp.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/browser-wasm/nativeassets/net8.0/e_sqlite3.a
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/linux-arm/native/libe_sqlite3.so
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/linux-arm64/native/libe_sqlite3.so
@@ -57,11 +70,4 @@
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ApiWeb.pdb
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ApiWeb.genruntimeconfig.cache
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ref/ApiWeb.dll
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Xceed.Document.NET.dll
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Xceed.Drawing.NET.dll
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Xceed.Words.NET.dll
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/SkiaSharp.dll
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/osx/native/libSkiaSharp.dylib
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/win-arm64/native/libSkiaSharp.dll
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/win-x64/native/libSkiaSharp.dll
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/runtimes/win-x86/native/libSkiaSharp.dll
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_X_pericu.docx

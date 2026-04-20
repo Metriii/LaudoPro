@@ -13,11 +13,18 @@
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Modelos\ESQUELETO.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </None>
-  </ItemGroup>
+<ItemGroup>
+  <!-- Modelo -->
+  <None Update="Modelos/ESQUELETO.docx">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+  </None>
+
+  <!-- TODOS os anexos -->
+  <None Update="ANEXOS - PERICULOSIDADE/**/*">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+  </None>
+</ItemGroup>
 
 </Project>

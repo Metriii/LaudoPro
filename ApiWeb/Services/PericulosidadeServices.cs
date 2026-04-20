@@ -110,9 +110,79 @@ namespace ApiWeb.Services.PericulosidadeServices
                 SearchValue = "#Reclamadas",
                 NewValue = resultado
             });
-            
+            doc.ReplaceText(new StringReplaceTextOptions()
+            {
+                SearchValue = "{{TipoDoLaudo}}",
+                NewValue = tipo
+            });
+            doc.ReplaceText(new StringReplaceTextOptions()
+            {
+                SearchValue = "{{Anexos}}",
+                NewValue = LerAnexos(periculo.AnexosPericu)
+            });
             doc.SaveAs(caminhoSaida);
         }
+        
         }
+public string LerAnexos(List<string> anexos)
+{
+    string pasta = Path.Combine(AppContext.BaseDirectory, "ANEXOS - PERICULOSIDADE");
+    string resultado = "";
+
+    var acoes = new Dictionary<string, Action>(StringComparer.OrdinalIgnoreCase)
+    {
+        ["anexos_1_pericu"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_1_pericu.docx")) + Environment.NewLine,
+        ["anexos_1_pericu.docx"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_1_pericu.docx")) + Environment.NewLine,
+
+        ["anexos_2_pericu"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_2_pericu.docx")) + Environment.NewLine,
+        ["anexos_2_pericu.docx"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_2_pericu.docx")) + Environment.NewLine,
+
+        ["anexos_3_pericu"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_3_pericu.docx")) + Environment.NewLine,
+        ["anexos_3_pericu.docx"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_3_pericu.docx")) + Environment.NewLine,
+
+        ["anexos_4_pericu"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_4_pericu.docx")) + Environment.NewLine,
+        ["anexos_4_pericu.docx"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_4_pericu.docx")) + Environment.NewLine,
+
+        ["anexos_5_pericu"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_5_pericu.docx")) + Environment.NewLine,
+        ["anexos_5_pericu.docx"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_5_pericu.docx")) + Environment.NewLine,
+
+        // 🔥 suporte ao X (resultado do *)
+        ["anexos_X_pericu"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_X_pericu.docx")) + Environment.NewLine,
+        ["anexos_X_pericu.docx"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_X_pericu.docx")) + Environment.NewLine
+    };
+
+    foreach (var nome in anexos)
+    {
+        if (string.IsNullOrWhiteSpace(nome))
+            continue;
+
+        // 🔥 AQUI é o que você queria
+        var nomeNormalizado = nome.Trim().Replace("*", "X");
+
+        // garante extensão
+        if (!nomeNormalizado.EndsWith(".docx", StringComparison.OrdinalIgnoreCase))
+            nomeNormalizado += ".docx";
+
+        if (acoes.TryGetValue(nomeNormalizado, out var acao))
+        {
+            acao.Invoke();
+        }
+        else
+        {
+            Console.WriteLine($"Anexo desconhecido: '{nomeNormalizado}'");
+        }
+    }
+
+    return resultado;
+}
+public string LerTextoDocx(string caminho)
+{
+    using (var doc = Xceed.Words.NET.DocX.Load(caminho))
+    {
+        return doc.Text;
+    }
+}
+
+
     }
 }

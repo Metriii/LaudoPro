@@ -302,7 +302,11 @@
       select.appendChild(placeholderOption);
 
       const limite = (tipo === 'peric') ? 5 : 14;
+
       for (let i = 1; i <= limite; i++) {
+
+        if (tipo === 'insalub' && i === 4) continue;
+
         const opt = document.createElement("option");
         opt.value = i;
         opt.textContent = `Anexo ${i}`;
