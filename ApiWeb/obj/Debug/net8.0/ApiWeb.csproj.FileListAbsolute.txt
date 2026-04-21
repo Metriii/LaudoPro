@@ -71,3 +71,4 @@
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ApiWeb.genruntimeconfig.cache
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ref/ApiWeb.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_X_pericu.docx
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/Objetivo.docx

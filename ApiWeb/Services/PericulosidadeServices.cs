@@ -10,120 +10,78 @@ namespace ApiWeb.Services.PericulosidadeServices
     public class PericulosidadeServices
     {
         internal void GerarDocumentoPericulosidade(Periculosidade periculo, string tipo)
-        {       
-        var caminhoModelo = Path.Combine(AppContext.BaseDirectory, "Modelos", "ESQUELETO.docx");
-        
-        var caminhoSaida = Path.Combine(AppContext.BaseDirectory, "Modelos", $"Laudo_{periculo.NumeroPericia}.docx");
+{
+    var caminhoModelo = Path.Combine(AppContext.BaseDirectory, "Modelos", "ESQUELETO.docx");
+    var caminhoSaida = Path.Combine(AppContext.BaseDirectory, "Modelos", $"Laudo_{periculo.NumeroPericia}.docx");
 
-        var nomesReclamantes = periculo.Reclamante
-            .Select((r, i) => $"{r}")
-            .Where(r => !string.IsNullOrEmpty(r));
+    var nomesReclamantes = periculo.Reclamante
+        .Select(r => $"{r}")
+        .Where(r => !string.IsNullOrEmpty(r));
 
-            string resultadoReclamantes  = string.Join("\n          ", nomesReclamantes);
+    string resultadoReclamantes = string.Join("\n          ", nomesReclamantes);
 
-        var nomes = periculo.Reclamada
-            .Select((r, i) => $"{r}")
-            .Where(r => !string.IsNullOrEmpty(r));
-            string resultadoReclamadas = string.Join("\n          ", nomes);
+    var nomes = periculo.Reclamada
+        .Select(r => $"{r}")
+        .Where(r => !string.IsNullOrEmpty(r));
 
-        
-        var lista = periculo.Reclamada ?? new List<string>();
-        var nomeReclamada = lista
-            .Where(r => !string.IsNullOrWhiteSpace(r))
-            .ToList();
-            string resultado;
+    string resultadoReclamadas = string.Join("\n          ", nomes);
 
-                if (nomeReclamada.Count == 0)
-                {
-                    resultado = "";
-                }
-                else if (nomeReclamada.Count == 1)
-                {
-                    resultado = nomeReclamada[0];
-                }
-                else if (nomeReclamada.Count == 2)
-                {
-                    resultado = $"{nomeReclamada[0]} e {nomeReclamada[1]}";
-                }
-                else
-                {
-                    resultado = string.Join(", ", nomeReclamada.Take(nomeReclamada.Count - 1))
-                            + " e "
-                            + nomeReclamada.Last();
-                }
+    var lista = periculo.Reclamada ?? new List<string>();
+    var nomeReclamada = lista
+        .Where(r => !string.IsNullOrWhiteSpace(r))
+        .ToList();
 
-        using (var doc = DocX.Load(caminhoModelo))
+    string resultado;
+
+    if (nomeReclamada.Count == 0)
+        resultado = "";
+    else if (nomeReclamada.Count == 1)
+        resultado = nomeReclamada[0];
+    else if (nomeReclamada.Count == 2)
+        resultado = $"{nomeReclamada[0]} e {nomeReclamada[1]}";
+    else
+        resultado = string.Join(", ", nomeReclamada.Take(nomeReclamada.Count - 1))
+                    + " e "
+                    + nomeReclamada.Last();
+
+    using (var doc = DocX.Load(caminhoModelo))
+    {
+        var substituicoes = new Dictionary<string, string>
         {
-            doc.ReplaceText(new StringReplaceTextOptions()
+            { "{{NumeroPericia}}", periculo.NumeroPericia ?? "" },
+            { "{{NumeroVara}}", periculo.NumeroVara?.ToString() ?? "" },
+            { "{{DataPericia}}", periculo.DataPericia ?? "" },
+            { "{{DATALAUDO}}", periculo.DataLaudo ?? "" },
+            { "{{CIDADE}}", periculo.Endereco?.Cidade ?? "" },
+            { "{{BAIRRO}}", periculo.Endereco?.Bairro ?? "" },
+            { "{{RUA}}", periculo.Endereco?.Rua ?? "" },
+            { "{{NUMERO}}", periculo.Endereco?.Numero ?? "" },
+            { "{{Reclamantes}} ", resultadoReclamantes },
+            { "{{Reclamada}}", resultadoReclamadas },
+            { "#Reclamadas", resultado },
+            { "{{TipoDoLaudo}}", tipo ?? "" },
+            { "{{Anexos}}", LerAnexos(periculo.AnexosPericu) ?? "" },
+            { "{{TipoNorma}}", "NR-16" },
+            { "{{LocalDeTrabalho}}", periculo.Atividades?.Local ?? "" },
+            { "{{Paredes}}", periculo.Atividades?.Paredes ?? "" },
+            { "{{Pisos}}", periculo.Atividades?.Pisos ?? "" },
+            { "{{Iluminacao}}", periculo.Atividades?.Iluminacao ?? "" },
+            { "{{Ventilacao}}", periculo.Atividades?.Ventilacao ?? "" },
+            {"{{Objetivo}}", LerTextoDocx(Path.Combine(AppContext.BaseDirectory, "ANEXOS - PERICULOSIDADE", "Objetivo.docx")) ?? "" }
+        };
+
+        foreach (var item in substituicoes)
+        {
+            doc.ReplaceText(new StringReplaceTextOptions
             {
-                SearchValue = "{{NumeroPericia}}",
-                NewValue = periculo.NumeroPericia
-               
+                SearchValue = item.Key,
+                NewValue = item.Value
             });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{NumeroVara}}",
-                NewValue = periculo.NumeroVara?.ToString() ?? ""
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{DataPericia}}",
-                NewValue = periculo.DataPericia ?? ""
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{DATALAUDO}}",
-                NewValue = periculo.DataLaudo ?? ""
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{CIDADE}}",
-                NewValue = periculo.Endereco?.Cidade ?? ""
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{BAIRRO}}",
-                NewValue = periculo.Endereco?.Bairro ?? ""
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{RUA}}",
-                NewValue = periculo.Endereco?.Rua ?? ""
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{NUMERO}}",
-                NewValue = periculo.Endereco?.Numero ?? ""
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{Reclamantes}} ",
-                NewValue = resultadoReclamantes
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{Reclamada}}",
-                NewValue = resultadoReclamadas
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "#Reclamadas",
-                NewValue = resultado
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{TipoDoLaudo}}",
-                NewValue = tipo
-            });
-            doc.ReplaceText(new StringReplaceTextOptions()
-            {
-                SearchValue = "{{Anexos}}",
-                NewValue = LerAnexos(periculo.AnexosPericu)
-            });
-            doc.SaveAs(caminhoSaida);
         }
-        
-        }
+
+        doc.SaveAs(caminhoSaida);
+    }
+}
 public string LerAnexos(List<string> anexos)
 {
     string pasta = Path.Combine(AppContext.BaseDirectory, "ANEXOS - PERICULOSIDADE");
@@ -148,7 +106,7 @@ public string LerAnexos(List<string> anexos)
 
         // 🔥 suporte ao X (resultado do *)
         ["anexos_X_pericu"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_X_pericu.docx")) + Environment.NewLine,
-        ["anexos_X_pericu.docx"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_X_pericu.docx")) + Environment.NewLine
+        ["anexos_X_pericu.docx"] = () => resultado += LerTextoDocx(Path.Combine(pasta, "anexos_X_pericu.docx")) + Environment.NewLine,
     };
 
     foreach (var nome in anexos)
