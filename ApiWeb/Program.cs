@@ -67,6 +67,14 @@ string numeroPericia = root.TryGetProperty("numeroPericia", out var n)? n.GetStr
         if (valor != null)
             documentos.Add(valor);
     }
+    List<string> presentesFuncao = new List<string>();
+    foreach (var item in root.GetProperty("presentesFuncao").EnumerateArray()){
+        var valor = item.GetString();
+        if (valor != null)
+        {
+            presentesFuncao.Add(valor);
+        }
+    }   
 
     var local = root.GetProperty("localTrabalho");
     string localAtividade = local.GetProperty("local").GetString() ?? "";
@@ -86,8 +94,10 @@ string numeroPericia = root.TryGetProperty("numeroPericia", out var n)? n.GetStr
     string dataLaudo = root.GetProperty("dataLaudo").GetString() ?? "";
     string dataPericia = root.GetProperty("dataPericia").GetString() ?? "";
 
+    
 
-    Periculosidade periculo = new Periculosidade(numeroPericia, dataPericia, dataLaudo, new LocalDeTrabalho(localAtividade, paredes, pisos, iluminacao, ventilacao), new Endereco(rua, numero, cidade, bairro), reclamantes, reclamadas, documentos, anexosPericu);
+
+    Periculosidade periculo = new Periculosidade(numeroPericia, dataPericia, dataLaudo, new LocalDeTrabalho(localAtividade, paredes, pisos, iluminacao, ventilacao), new Endereco(rua, numero, cidade, bairro), reclamantes, reclamadas, documentos, anexosPericu, presentesFuncao);
     System.Console.WriteLine(periculo);
 
      if (string.IsNullOrEmpty(periculo.NumeroPericia))
@@ -95,6 +105,11 @@ string numeroPericia = root.TryGetProperty("numeroPericia", out var n)? n.GetStr
         return Results.BadRequest("NumeroPericia é obrigatório.");
     }
     System.Console.WriteLine(periculo.NumeroPericia);
+
+        foreach(var presentes in periculo.PresentesFuncao) {
+                System.Console.WriteLine(presentes);
+            }
+
 
     var service = new PericulosidadeServices();
     service.GerarDocumentoPericulosidade(periculo, tipo);

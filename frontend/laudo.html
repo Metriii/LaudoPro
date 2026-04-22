@@ -71,8 +71,9 @@
     <input type="text" id="bairro-peric" placeholder="Bairro">
     <input type="text" id="cidade-peric" placeholder="Cidade">
   </div>
-
+  
   <hr class="linha">
+
 
   <div class="local-trabalho">
     <input type="text" id="local-peric" placeholder="Local de Trabalho">
@@ -81,6 +82,19 @@
     <input type="text" id="iluminacao-peric" placeholder="Iluminação">
     <input type="text" id="ventilacao-peric" placeholder="Ventilação">
   </div>
+
+
+  <hr class="linha">
+<div id="lista-presentes-peric">
+  <div class="campo">
+    <input type="text" class="nome-presente" placeholder="Nome">
+    <input type="text" class="funcao-presente" placeholder="Função">
+
+    <button type="button" onclick="adicionarCampoPresente('lista-presentes-peric')">+</button>
+    <button type="button" onclick="removerCampo(this)">-</button>
+  </div>
+</div>
+
 
   <hr class="linha">
 
@@ -162,12 +176,10 @@
     </button>
   </div>
 </div>
-      <!--==========================
-         PERICULOSIDADE / INSALUBRIDADE
-      ============================-->
-      <!--==========================
-   PERICULOSIDADE + INSALUBRIDADE (AMBOS)
-============================-->
+
+<!-- ============================
+          PERICULOSIDADE + INSALUBRIDADE (AMBOS)
+============================ -->
 <div id="periculosidade-insalubridade" class="conteudo" style="display:none;">
 
   <input type="text" id="numero-processo-ambos" placeholder="N° do Processo">
@@ -345,9 +357,68 @@
       container.appendChild(div);
     }
 
-    // ==========================
-    // FUNÇÕES DE DOCUMENTOS
-    // ==========================
+    //===========================
+    //ADICIONAR LISTA DE PRESENTES
+    //===========================
+
+function adicionarCampoPresente(idContainer) {
+  const container = document.getElementById(idContainer);
+  const div = document.createElement('div');
+  div.classList.add('campo');
+
+  div.innerHTML = `
+    <input type="text" class="nome-presente" placeholder="Nome">
+    <input type="text" class="funcao-presente" placeholder="Função">
+    <button type="button" onclick="adicionarCampoPresente('${idContainer}')">+</button>
+    <button type="button" onclick="removerCampo(this)">-</button>
+  `;
+
+  container.appendChild(div);
+}
+
+
+function pegarPresentes(idContainer) {
+  const container = document.getElementById(idContainer);
+
+  console.log("CONTAINER:", container);
+
+  if (!container) {
+    console.log("❌ Container não encontrado:", idContainer);
+    return [];
+  }
+
+  const itens = container.querySelectorAll(".campo");
+
+  console.log("CAMPOS ENCONTRADOS:", itens.length);
+
+  const lista = [];
+
+  itens.forEach((item, index) => {
+    const nomeEl = item.querySelector(".nome-presente");
+    const funcaoEl = item.querySelector(".funcao-presente");
+
+    console.log(`ITEM ${index}:`, nomeEl, funcaoEl);
+
+    const nome = nomeEl?.value?.trim();
+    const funcao = funcaoEl?.value?.trim();
+
+    console.log(`VALORES ${index}:`, nome, funcao);
+
+    if (nome || funcao) {
+      lista.push(`${nome || ""} - ${funcao || ""}`);
+    }
+  });
+
+  console.log("LISTA FINAL:", lista);
+
+  return lista;
+}
+
+
+    //============================
+    //FUNÇÃO PARA ADICIONAR PRESENTES
+    //============================
+
     function criarSelectDocumento() {
       const select = document.createElement("select");
       select.style.color = "#999";
@@ -521,6 +592,8 @@ async function enviarPericulosidade() {
       anexos: pegarListaAnexos("container-peric"),
       documentos: pegarListaDocumentos("container-documentos-peric"),
 
+      presentesFuncao: pegarPresentes("lista-presentes-peric"),
+
       localTrabalho: {
         local: document.getElementById("local-peric").value,
         paredes: document.getElementById("paredes-peric").value,
@@ -540,8 +613,7 @@ async function enviarPericulosidade() {
       dataPericia: formatarData("data-pericia-peric")
     };
 
-    console.log("Enviando PERICULOSIDADE:", dados);
-
+    console.log("Presentes:", dados.presentesFuncao); // 🧪 DEBUG
     await fetch("http://localhost:5000/api/laudo-pericu", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -549,10 +621,9 @@ async function enviarPericulosidade() {
     });
 
   } catch (erro) {
-    console.error("ERRO PERICULOSIDADE:", erro);
+    console.error("ERRO:", erro);
   }
 }
-
 async function enviarInsalubridade() {
   try {
     const dados = {

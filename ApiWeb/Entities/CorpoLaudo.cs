@@ -23,6 +23,7 @@ namespace ApiWeb.Entities.Corpo
 
         public List<string> Documentos { get; protected set; } = new List<string>();
 
+        public List<string> PresentesFuncao { get; protected set; } = new List<string>();
         public CorpoLaudo() { }
 
         public CorpoLaudo(string numeroPericia, string dataPericia, string dataLaudo, LocalDeTrabalho atividades, Endereco endereco)

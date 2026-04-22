@@ -44,6 +44,14 @@ namespace ApiWeb.Services.PericulosidadeServices
                     + " e "
                     + nomeReclamada.Last();
 
+string resultadoPresentes = string.Join(Environment.NewLine,
+    periculo.PresentesFuncao
+        .Where(p => !string.IsNullOrWhiteSpace(p))
+        .Select(p => "• " + p.Trim())
+);
+
+
+
     using (var doc = DocX.Load(caminhoModelo))
     {
         var substituicoes = new Dictionary<string, string>
@@ -67,17 +75,25 @@ namespace ApiWeb.Services.PericulosidadeServices
             { "{{Pisos}}", periculo.Atividades?.Pisos ?? "" },
             { "{{Iluminacao}}", periculo.Atividades?.Iluminacao ?? "" },
             { "{{Ventilacao}}", periculo.Atividades?.Ventilacao ?? "" },
-            {"{{Objetivo}}", LerTextoDocx(Path.Combine(AppContext.BaseDirectory, "ANEXOS - PERICULOSIDADE", "Objetivo.docx")) ?? "" }
+            {"{{Objetivo}}", LerTextoDocx(Path.Combine(AppContext.BaseDirectory, "ANEXOS - PERICULOSIDADE", "Objetivo.docx")) ?? "" },
         };
-
-        foreach (var item in substituicoes)
-        {
-            doc.ReplaceText(new StringReplaceTextOptions
+         doc.ReplaceText(new StringReplaceTextOptions()
             {
-                SearchValue = item.Key,
-                NewValue = item.Value
+                SearchValue = "{{presentes}}",
+                NewValue = resultadoPresentes
             });
-        }
+
+foreach (var item in substituicoes)
+{
+    doc.ReplaceText(new StringReplaceTextOptions
+    {
+        SearchValue = item.Key,
+        NewValue = item.Value ?? ""
+    });
+}
+
+
+        
 
         doc.SaveAs(caminhoSaida);
     }

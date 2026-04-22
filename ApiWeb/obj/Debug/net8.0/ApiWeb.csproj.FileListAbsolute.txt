@@ -1,10 +1,5 @@
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/appsettings.Development.json
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/appsettings.json
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_1_pericu.docx
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_2_pericu.docx
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_3_pericu.docx
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_4_pericu.docx
-/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_5_pericu.docx
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/Modelos/ESQUELETO.docx
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ApiWeb
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ApiWeb.deps.json
@@ -64,11 +59,16 @@
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.ApiWeb.props
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/staticwebassets.pack.json
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/scopedcss/bundle/ApiWeb.styles.css
-/home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ApiWeb.csproj.CopyComplete
+/home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ApiWeb.csproj.Up2Date
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ApiWeb.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/refint/ApiWeb.dll
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ApiWeb.pdb
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ApiWeb.genruntimeconfig.cache
 /home/metri/LaudoPro/LaudoPro/ApiWeb/obj/Debug/net8.0/ref/ApiWeb.dll
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_1_pericu.docx
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_2_pericu.docx
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_3_pericu.docx
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_4_pericu.docx
+/home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_5_pericu.docx
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/anexos_X_pericu.docx
 /home/metri/LaudoPro/LaudoPro/ApiWeb/bin/Debug/net8.0/ANEXOS - PERICULOSIDADE/Objetivo.docx
