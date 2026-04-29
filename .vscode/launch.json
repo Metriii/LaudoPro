@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Rodar ApiWeb + DocViewer",
+      "configurations": [
+        "ApiWeb",
+        "DocViewer"
+      ]
+    }
+  ],
+  "configurations": [
+    {
+      "name": "ApiWeb",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/ApiWeb/bin/Debug/net8.0/ApiWeb.dll",
+      "cwd": "${workspaceFolder}/ApiWeb",
+      "stopAtEntry": false
+    },
+    {
+      "name": "DocViewer",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/DocViewer/bin/Debug/net8.0/DocViewer.dll",
+      "cwd": "${workspaceFolder}/DocViewer",
+      "stopAtEntry": false
+    }
+  ]
+}
