@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/DocViewer.bundle.scp.css"
     },
     {
+      "Id": "/home/metri/LaudoPro/LaudoPro/DocViewer/wwwroot/css/laudo.css",
+      "PackagePath": "staticwebassets/css/laudo.css"
+    },
+    {
       "Id": "/home/metri/LaudoPro/LaudoPro/DocViewer/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

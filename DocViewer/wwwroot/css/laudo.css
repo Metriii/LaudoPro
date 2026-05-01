@@ -1,0 +1,199 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* BODY */
+body {
+  background: #eef1f7;
+  color: #333;
+}
+
+/* CONTAINER */
+.main {
+  max-width: 1000px;
+  width: 100%;
+  padding: 20px 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* TÍTULO */
+.titulo {
+  margin-bottom: 25px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* BOX */
+.box {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  margin: 0 auto 40px auto;
+}
+
+/* VOLTAR */
+.voltar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #5b7cff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+/* BOTÃO SALVAR */
+.salvar {
+  padding: 12px 35px;
+  background: #5b7cff;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+/* TABS */
+.tabs {
+  margin-bottom: 25px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 10px 18px;
+  font-size: 14px;
+  background: #eef2ff;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #5b7cff;
+  color: white;
+}
+
+/* INPUTS */
+input, select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  font-size: 14px;
+}
+
+/* CAMPOS */
+.campo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.campo input,
+.campo select {
+  flex: 1;
+  height: 42px;
+}
+
+/* BOTÕES + - */
+.campo button {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+
+.campo button {
+  background: #5b7cff; /* 🔥 azul padrão */
+}
+
+.campo button:hover {
+  background: #4a68e0;
+}
+
+/* GRID */
+.endereco,
+.local-trabalho {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 🔥 2x2 fixo */
+  gap: 10px;
+}
+
+/* LINHA */
+.linha {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ccc, transparent);
+  margin: 25px 0;
+}
+
+/* SALVAR AREA */
+.salvar-area {
+  margin-top: 20px;
+  text-align: right;
+}
+.acoes {
+  display: flex;
+  justify-content: center; /* centraliza */
+  gap: 15px;               /* espaço entre botões */
+  margin-top: 20px;
+  flex-wrap: wrap;         /* quebra no celular */
+}
+.btn-padrao {
+  padding: 12px 35px;
+  background: #5b7cff;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(91,124,255,0.4);
+}
+
+.btn-padrao:hover {
+  background: #4a68e0;
+  transform: scale(1.05);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .box {
+    padding: 20px;
+  }
+
+  .campo {
+    flex-direction: column;
+  }
+
+  .campo button {
+    width: 100%;
+  }
+
+  .salvar {
+    width: 100%;
+  }
+
+  .voltar {
+    position: static;
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+}

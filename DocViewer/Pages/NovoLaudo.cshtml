@@ -1,0 +1,296 @@
+@page
+@model NovoLaudoModel
+
+<style>
+  .conteudo { display: none; }
+  .active { background-color: #ddd; font-weight: bold; }
+  .campo { display: flex; gap: 5px; margin-bottom: 8px; align-items: center; }
+  .linha { margin: 20px 0; border: 0; border-top: 1px solid #ccc; }
+  label { font-weight: bold; display: block; margin-top: 10px; margin-bottom: 5px; color: #555; }
+  .endereco input, .local-trabalho input { margin-right: 5px; }
+  .salvar-area { margin-top: 20px; }
+</style>
+
+<div class="main">
+  <h1 class="titulo">Novo Laudo</h1>
+
+  <div class="box">
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tipo="Periculosidade"
+        onclick="trocarAba(event, 'periculosidade'); pegarTipo(this)">
+        Periculosidade
+      </button>
+
+      <button class="tab-btn" data-tipo="Insalubridade"
+        onclick="trocarAba(event, 'insalubridade'); pegarTipo(this)">
+        Insalubridade
+      </button>
+
+      <button class="tab-btn" data-tipo="Periculosidade-Insalubridade"
+        onclick="trocarAba(event, 'periculosidade-insalubridade'); pegarTipo(this)">
+        Periculosidade/Insalubridade
+      </button>
+    </div>
+
+    <!-- PERICULOSIDADE -->
+    <div id="periculosidade" class="conteudo" style="display:block;">
+
+      <input type="text" id="numero-processo-peric" placeholder="N° do Processo">
+
+      <hr class="linha">
+
+      <div id="lista-reclamantes-peric">
+        <div class="campo">
+          <input type="text" placeholder="Reclamante">
+          <button type="button" onclick="adicionarReclamante('lista-reclamantes-peric')">+</button>
+          <button type="button" onclick="removerCampo(this)">-</button>
+        </div>
+      </div>
+
+      <div id="lista-reclamadas-peric">
+        <div class="campo">
+          <input type="text" placeholder="Reclamada">
+          <button type="button" onclick="adicionarCampo('lista-reclamadas-peric')">+</button>
+          <button type="button" onclick="removerCampo(this)">-</button>
+        </div>
+      </div>
+
+      <hr class="linha">
+
+      <div id="container-peric"></div>
+      <div id="container-documentos-peric"></div>
+
+      <hr class="linha">
+
+      <div class="endereco">
+        <input type="text" id="rua-peric" placeholder="Rua">
+        <input type="text" id="numero-peric" placeholder="Número">
+        <input type="text" id="bairro-peric" placeholder="Bairro">
+        <input type="text" id="cidade-peric" placeholder="Cidade">
+      </div>
+
+      <hr class="linha">
+
+      <div class="local-trabalho">
+        <input type="text" id="local-peric" placeholder="Local de Trabalho">
+        <input type="text" id="paredes-peric" placeholder="Paredes">
+        <input type="text" id="pisos-peric" placeholder="Pisos">
+        <input type="text" id="iluminacao-peric" placeholder="Iluminação">
+        <input type="text" id="ventilacao-peric" placeholder="Ventilação">
+      </div>
+
+      <hr class="linha">
+
+      <div id="lista-presentes-peric">
+        <div class="campo">
+          <input type="text" class="nome-presente" placeholder="Nome">
+          <input type="text" class="funcao-presente" placeholder="Função">
+          <button type="button" onclick="adicionarCampoPresente('lista-presentes-peric')">+</button>
+          <button type="button" onclick="removerCampo(this)">-</button>
+        </div>
+      </div>
+
+      <hr class="linha">
+
+      <div>
+        <input type="text" id="data-pericia-peric" placeholder="Data Perícia"
+          onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+
+        <input type="text" id="data-laudo-peric" placeholder="Data Laudo"
+          onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+      </div>
+
+      <br><br>
+
+<div class="acoes">
+  <button class="btn-padrao" onclick="window.location.href='/Viewer'">
+    Abrir Documento
+  </button>
+
+  <button class="salvar" onclick="enviarPericulosidade()">
+    Salvar
+  </button>
+</div>
+
+    </div>
+
+    <div id="insalubridade" class="conteudo" style="display:none;">
+
+    <input type="text" id="numero-processo-insalub" placeholder="N° do Processo">
+
+    <!-- RECLAMANTES -->
+    <div id="lista-reclamantes-insalub">
+        <div class="campo">
+        <input type="text" placeholder="Reclamante">
+        <button type="button" onclick="adicionarReclamante('lista-reclamantes-insalub')">+</button>
+        <button type="button" onclick="removerCampo(this)">-</button>
+        </div>
+    </div>
+
+    <!-- RECLAMADAS -->
+    <div id="lista-reclamadas-insalub">
+        <div class="campo">
+        <input type="text" placeholder="Reclamada">
+        <button type="button" onclick="adicionarCampo('lista-reclamadas-insalub')">+</button>
+        <button type="button" onclick="removerCampo(this)">-</button>
+        </div>
+    </div>
+
+    <hr class="linha">
+
+    <!-- ANEXOS + DOCUMENTOS -->
+    <div id="container-insalub"></div>
+    <div id="container-documentos-insalub"></div>
+
+    <hr class="linha">
+
+    <!-- ENDEREÇO -->
+    <div class="endereco">
+        <input type="text" id="rua-insalub" placeholder="Rua">
+        <input type="text" id="numero-insalub" placeholder="Número">
+        <input type="text" id="bairro-insalub" placeholder="Bairro">
+        <input type="text" id="cidade-insalub" placeholder="Cidade">
+    </div>
+
+    <hr class="linha">
+
+    <!-- LOCAL DE TRABALHO -->
+    <div class="local-trabalho">
+        <input type="text" id="local-insalub" placeholder="Local de Trabalho">
+        <input type="text" id="paredes-insalub" placeholder="Paredes">
+        <input type="text" id="pisos-insalub" placeholder="Pisos">
+        <input type="text" id="iluminacao-insalub" placeholder="Iluminação">
+        <input type="text" id="ventilacao-insalub" placeholder="Ventilação">
+    </div>
+
+    <hr class="linha">
+
+    <!-- 👇 NOVO BLOCO (NOME + FUNÇÃO) -->
+    <div id="lista-presentes-insalub">
+        <div class="campo">
+        <input type="text" class="nome-presente" placeholder="Nome">
+        <input type="text" class="funcao-presente" placeholder="Função">
+
+        <button type="button" onclick="adicionarCampoPresente('lista-presentes-insalub')">+</button>
+        <button type="button" onclick="removerCampo(this)">-</button>
+        </div>
+    </div>
+
+    <hr class="linha">
+
+    <!-- DATAS -->
+    <div>
+        <input type="text" id="data-pericia-insalub" placeholder="Data Perícia"
+        onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+
+        <input type="text" id="data-laudo-insalub" placeholder="Data Laudo"
+        onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+    </div>
+
+    <br><br>
+
+<div class="acoes">
+  <button class="btn-padrao" onclick="window.location.href='/Viewer'">
+    Abrir Documento
+  </button>
+
+  <button class="salvar" onclick="enviarInsalubridade()">
+    Salvar
+  </button>
+</div>
+
+    </div>
+    <div id="periculosidade-insalubridade" class="conteudo" style="display:none;">
+
+  <input type="text" id="numero-processo-ambos" placeholder="N° do Processo">
+
+  <!-- RECLAMANTES -->
+  <div id="lista-reclamantes-ambos">
+    <div class="campo">
+      <input type="text" placeholder="Reclamante">
+      <button type="button" onclick="adicionarReclamante('lista-reclamantes-ambos')">+</button>
+      <button type="button" onclick="removerCampo(this)">-</button>
+    </div>
+  </div>
+
+  <!-- RECLAMADAS -->
+  <div id="lista-reclamadas-ambos">
+    <div class="campo">
+      <input type="text" placeholder="Reclamada">
+      <button type="button" onclick="adicionarCampo('lista-reclamadas-ambos')">+</button>
+      <button type="button" onclick="removerCampo(this)">-</button>
+    </div>
+  </div>
+
+  <hr class="linha">
+
+  <!-- ANEXOS -->
+  <div id="container-ambos-peric"></div>
+  <div id="container-ambos-insalub"></div>
+
+  <!-- DOCUMENTOS -->
+  <div id="container-documentos-ambos"></div>
+
+  <hr class="linha">
+
+  <!-- ENDEREÇO -->
+  <div class="endereco">
+    <input type="text" id="rua-ambos" placeholder="Rua">
+    <input type="text" id="numero-ambos" placeholder="Número">
+    <input type="text" id="bairro-ambos" placeholder="Bairro">
+    <input type="text" id="cidade-ambos" placeholder="Cidade">
+  </div>
+
+  <hr class="linha">
+
+  <!-- LOCAL DE TRABALHO -->
+  <div class="local-trabalho">
+    <input type="text" id="local-ambos" placeholder="Local de Trabalho">
+    <input type="text" id="paredes-ambos" placeholder="Paredes">
+    <input type="text" id="pisos-ambos" placeholder="Pisos">
+    <input type="text" id="iluminacao-ambos" placeholder="Iluminação">
+    <input type="text" id="ventilacao-ambos" placeholder="Ventilação">
+  </div>
+
+  <hr class="linha">
+
+  <!-- PRESENTES (NOME + FUNÇÃO) -->
+  <div id="lista-presentes-ambos">
+    <div class="campo">
+      <input type="text" class="nome-presente" placeholder="Nome">
+      <input type="text" class="funcao-presente" placeholder="Função">
+
+      <button type="button" onclick="adicionarCampoPresente('lista-presentes-ambos')">+</button>
+      <button type="button" onclick="removerCampo(this)">-</button>
+    </div>
+  </div>
+
+  <hr class="linha">
+
+  <!-- DATAS -->
+  <div>
+    <input type="text" id="data-pericia-ambos" placeholder="Data Perícia"
+      onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+
+    <input type="text" id="data-laudo-ambos" placeholder="Data Laudo"
+      onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+  </div>
+
+  <br><br>
+<div class="acoes">
+  <button class="btn-padrao" onclick="window.location.href='/Viewer'">
+    Abrir Documento
+  </button>
+
+  <button class="salvar" onclick="enviarambos()">
+    Salvar
+  </button>
+</div>
+
+</div>
+
+</div>
+
+</div>

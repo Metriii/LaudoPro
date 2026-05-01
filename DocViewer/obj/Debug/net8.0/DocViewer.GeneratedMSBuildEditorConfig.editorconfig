@@ -26,6 +26,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/metri/LaudoPro/LaudoPro/DocViewer/Pages/NovoLaudo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTm92b0xhdWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/metri/LaudoPro/LaudoPro/DocViewer/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "IDpqPFJrA0JweJTb2K/GPKB9+D4cEGc2pxvkJA4rsU0=",
+  "Hash": "mEj+e4vp2tawTeWv80izuBqXerBkvtz6W66aWafknqc=",
   "Source": "DocViewer",
   "BasePath": "_content/DocViewer",
   "Mode": "Default",
@@ -3739,6 +3739,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/metri/LaudoPro/LaudoPro/DocViewer/obj/Debug/net8.0/scopedcss/projectbundle/DocViewer.bundle.scp.css"
+    },
+    {
+      "Identity": "/home/metri/LaudoPro/LaudoPro/DocViewer/wwwroot/css/laudo.css",
+      "SourceId": "DocViewer",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/metri/LaudoPro/LaudoPro/DocViewer/wwwroot/",
+      "BasePath": "_content/DocViewer",
+      "RelativePath": "css/laudo.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/laudo.css"
     },
     {
       "Identity": "/home/metri/LaudoPro/LaudoPro/DocViewer/wwwroot/css/site.css",
