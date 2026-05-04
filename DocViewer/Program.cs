@@ -1,4 +1,7 @@
 using System.Diagnostics;
+using DocViewer.Models.Requests;
+using DocViewer.Entities.Periculosidade;
+using DocViewer.Entities.Corpo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +54,43 @@ app.MapGet("/atualizar-pdf", () =>
     );
 
     return Results.Redirect("/Viewer");
+});
+
+app.MapPost("/api/laudo-pericu", (PericulosidadeRequest request) =>
+{
+    if (string.IsNullOrEmpty(request.NumeroPericia))
+        return Results.BadRequest("NumeroPericia é obrigatório.");
+
+    if (request.LocalTrabalho == null || request.Endereco == null)
+        return Results.BadRequest("Dados incompletos.");
+
+    var periculo = new Periculosidade(
+        request.NumeroPericia,
+        request.DataPericia,
+        request.DataLaudo,
+        new LocalDeTrabalho(
+            request.LocalTrabalho.Local,
+            request.LocalTrabalho.Paredes,
+            request.LocalTrabalho.Pisos,
+            request.LocalTrabalho.Iluminacao,
+            request.LocalTrabalho.Ventilacao
+        ),
+        new Endereco(
+            request.Endereco.Rua,
+            request.Endereco.Numero,
+            request.Endereco.Cidade,
+            request.Endereco.Bairro
+        ),
+        request.Reclamantes,
+        request.Reclamadas,
+        request.Documentos,
+        request.Anexos,
+        request.PresentesFuncao
+    );
+
+    Console.WriteLine(periculo);
+
+    return Results.Ok("Laudo gerado com sucesso!");
 });
 
 app.Run();

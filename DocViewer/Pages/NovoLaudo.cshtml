@@ -120,6 +120,8 @@
 
     <input type="text" id="numero-processo-insalub" placeholder="N° do Processo">
 
+      <hr class="linha">
+
     <!-- RECLAMANTES -->
     <div id="lista-reclamantes-insalub">
         <div class="campo">
@@ -205,6 +207,8 @@
     <div id="periculosidade-insalubridade" class="conteudo" style="display:none;">
 
   <input type="text" id="numero-processo-ambos" placeholder="N° do Processo">
+  
+      <hr class="linha">
 
   <!-- RECLAMANTES -->
   <div id="lista-reclamantes-ambos">
@@ -290,7 +294,120 @@
 </div>
 
 </div>
+<script>
+async function enviarPericulosidade() {
 
+    // 🔹 RECLAMANTES
+    const reclamantes = Array.from(
+        document.querySelectorAll("#lista-reclamantes-peric input")
+    ).map(i => i.value.trim()).filter(v => v !== "");
+
+    // 🔹 RECLAMADAS
+    const reclamadas = Array.from(
+        document.querySelectorAll("#lista-reclamadas-peric input")
+    ).map(i => i.value.trim()).filter(v => v !== "");
+
+    // 🔹 DOCUMENTOS
+    const documentos = Array.from(
+        document.querySelectorAll("#container-documentos-peric input")
+    ).map(i => i.value.trim()).filter(v => v !== "");
+
+    // 🔹 ANEXOS
+    const anexos = Array.from(
+        document.querySelectorAll("#container-peric input")
+    ).map(i => i.value.trim()).filter(v => v !== "");
+
+    // 🔹 PRESENTES
+    const presentes = Array.from(
+        document.querySelectorAll("#lista-presentes-peric .campo")
+    ).map(div => {
+        const nome = div.querySelector(".nome-presente").value.trim();
+        const funcao = div.querySelector(".funcao-presente").value.trim();
+        return nome && funcao ? `${nome} - ${funcao}` : null;
+    }).filter(v => v !== null);
+
+    // 🔴 VALIDAÇÃO (AQUI ESTÁ O SEGREDO)
+    if (!document.getElementById("numero-processo-peric").value.trim())
+        return alert("Preencha o número do processo");
+
+    if (reclamantes.length === 0)
+        return alert("Adicione pelo menos um reclamante");
+
+    if (reclamadas.length === 0)
+        return alert("Adicione pelo menos uma reclamada");
+
+    if (documentos.length === 0)
+        return alert("Adicione pelo menos um documento");
+
+    if (anexos.length === 0)
+        return alert("Adicione pelo menos um anexo");
+
+    if (presentes.length === 0)
+        return alert("Adicione pelo menos um presente");
+
+    if (!document.getElementById("rua-peric").value.trim())
+        return alert("Preencha a rua");
+
+    if (!document.getElementById("numero-peric").value.trim())
+        return alert("Preencha o número");
+
+    if (!document.getElementById("bairro-peric").value.trim())
+        return alert("Preencha o bairro");
+
+    if (!document.getElementById("cidade-peric").value.trim())
+        return alert("Preencha a cidade");
+
+    if (!document.getElementById("local-peric").value.trim())
+        return alert("Preencha o local de trabalho");
+
+    if (!document.getElementById("data-pericia-peric").value)
+        return alert("Preencha a data da perícia");
+
+    if (!document.getElementById("data-laudo-peric").value)
+        return alert("Preencha a data do laudo");
+
+    // 🔹 OBJETO FINAL
+    const dados = {
+        numeroPericia: document.getElementById("numero-processo-peric").value,
+        dataPericia: document.getElementById("data-pericia-peric").value,
+        dataLaudo: document.getElementById("data-laudo-peric").value,
+
+        reclamantes,
+        reclamadas,
+        documentos,
+        anexos,
+        presentesFuncao: presentes,
+
+        localTrabalho: {
+            local: document.getElementById("local-peric").value,
+            paredes: document.getElementById("paredes-peric").value,
+            pisos: document.getElementById("pisos-peric").value,
+            iluminacao: document.getElementById("iluminacao-peric").value,
+            ventilacao: document.getElementById("ventilacao-peric").value
+        },
+
+        endereco: {
+            rua: document.getElementById("rua-peric").value,
+            numero: document.getElementById("numero-peric").value,
+            bairro: document.getElementById("bairro-peric").value,
+            cidade: document.getElementById("cidade-peric").value
+        }
+    };
+
+    console.log(dados);
+
+    const response = await fetch("/api/laudo-pericu", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados)
+    });
+
+    const result = await response.text();
+    alert(result);
+}
+</script>
 </div>
 
 </div>

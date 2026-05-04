@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DocViewer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19c3718e71e7b3ad83f2a2dfcebac5e5353dfdc7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a37e31095c4727eb73b2ec2b49f09f98517d7701")]
 [assembly: System.Reflection.AssemblyProductAttribute("DocViewer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DocViewer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

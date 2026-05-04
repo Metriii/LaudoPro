@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KBSYAu/Wcuk=",
+  "dgSpecHash": "uxwilhDAuAs=",
   "success": true,
   "projectFilePath": "/home/metri/LaudoPro/LaudoPro/ApiWeb/ApiWeb.csproj",
   "expectedPackageFiles": [
@@ -19,9 +19,7 @@
     "/home/metri/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.6/sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",
     "/home/metri/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.6/sqlitepclraw.provider.e_sqlite3.2.1.6.nupkg.sha512",
     "/home/metri/.nuget/packages/system.io.packaging/8.0.1/system.io.packaging.8.0.1.nupkg.sha512",
-    "/home/metri/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
-    "/home/metri/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/8.0.26/microsoft.netcore.app.runtime.linux-x64.8.0.26.nupkg.sha512",
-    "/home/metri/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/8.0.26/microsoft.aspnetcore.app.runtime.linux-x64.8.0.26.nupkg.sha512"
+    "/home/metri/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512"
   ],
   "logs": []
 }
