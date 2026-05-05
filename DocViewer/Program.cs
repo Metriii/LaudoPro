@@ -4,10 +4,12 @@ using DocViewer.Entities.Periculosidade;
 using DocViewer.Entities.Corpo;
 using DocViewer.Entities.Insalubridade;
 using DocViewer.Entities.Ambos;
+using DocViewer.Services.PericulosidadeServices;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddScoped<PericulosidadeServices>();
 builder.Services.AddRazorPages();
+
 
 var app = builder.Build();
 
@@ -58,7 +60,7 @@ app.MapGet("/atualizar-pdf", () =>
     return Results.Redirect("/Viewer");
 });
 
-app.MapPost("/api/laudo-pericu", (PericulosidadeRequest request) =>
+app.MapPost("/api/laudo-pericu", (PericulosidadeRequest request, PericulosidadeServices service) =>
 {
     if (string.IsNullOrEmpty(request.NumeroPericia))
         return Results.BadRequest("NumeroPericia é obrigatório.");
@@ -89,6 +91,7 @@ app.MapPost("/api/laudo-pericu", (PericulosidadeRequest request) =>
         request.Anexos,
         request.PresentesFuncao
     );
+
 
     Console.WriteLine(periculo);
 
@@ -127,7 +130,6 @@ app.MapPost("/api/laudo-insalub", (InsalubridadeRequest request) =>
     );
 
     Console.WriteLine(insalub);
-
     return Results.Ok("Laudo de insalubridade gerado!");
 });
 app.MapPost("/api/laudo-ambos", (AmbosRequest request) =>

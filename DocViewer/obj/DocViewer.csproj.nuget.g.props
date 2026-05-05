@@ -28,4 +28,7 @@
     <Import Project="$(NuGetPackageRoot)syncfusion.blazor.wordprocessor/33.2.4/buildTransitive/Syncfusion.Blazor.WordProcessor.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.wordprocessor/33.2.4/buildTransitive/Syncfusion.Blazor.WordProcessor.props')" />
     <Import Project="$(NuGetPackageRoot)syncfusion.blazor/33.2.4/buildTransitive/Syncfusion.Blazor.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor/33.2.4/buildTransitive/Syncfusion.Blazor.props')" />
   </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgXceed_Words_NET Condition=" '$(PkgXceed_Words_NET)' == '' ">/home/metri/.nuget/packages/xceed.words.net/5.2.26166.7850</PkgXceed_Words_NET>
+  </PropertyGroup>
 </Project>

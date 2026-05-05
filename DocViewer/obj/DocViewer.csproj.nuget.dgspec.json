@@ -54,6 +54,10 @@
             "Syncfusion.DocIO.Net.Core": {
               "target": "Package",
               "version": "[33.2.4, )"
+            },
+            "Xceed.Words.NET": {
+              "target": "Package",
+              "version": "[5.2.26166.7850, )"
             }
           },
           "imports": [

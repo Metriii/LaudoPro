@@ -83,14 +83,14 @@ string resultadoPresentes = string.Join(Environment.NewLine,
                 NewValue = resultadoPresentes
             });
 
-foreach (var item in substituicoes)
-{
-    doc.ReplaceText(new StringReplaceTextOptions
-    {
-        SearchValue = item.Key,
-        NewValue = item.Value ?? ""
-    });
-}
+        foreach (var item in substituicoes)
+        {
+            doc.ReplaceText(new StringReplaceTextOptions
+            {
+                SearchValue = item.Key,
+                NewValue = item.Value ?? ""
+            });
+        }
 
 
         

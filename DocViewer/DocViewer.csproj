@@ -10,6 +10,7 @@
     <PackageReference Include="Syncfusion.Blazor" Version="33.2.4" />
     <PackageReference Include="Syncfusion.Blazor.WordProcessor" Version="33.2.4" />
     <PackageReference Include="Syncfusion.DocIO.Net.Core" Version="33.2.4" />
+    <PackageReference Include="Xceed.Words.NET" Version="5.2.26166.7850" />
   </ItemGroup>
 
 </Project>
