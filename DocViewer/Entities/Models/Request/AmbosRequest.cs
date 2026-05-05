@@ -1,7 +1,8 @@
 using DocViewer.Models.Request;
+
 namespace DocViewer.Models.Requests
 {
-    public class PericulosidadeRequest
+    public class AmbosRequest
     {
         public string NumeroPericia { get; set; } = "";
         public string Tipo { get; set; } = "";
@@ -12,7 +13,8 @@ namespace DocViewer.Models.Requests
         public List<string> Reclamantes { get; set; } = new();
         public List<string> Reclamadas { get; set; } = new();
         public List<string> Documentos { get; set; } = new();
-        public List<string> Anexos { get; set; } = new();
+        public List<string> AnexosPericulosidade { get; set; } = new();
+        public List<string> AnexosInsalubridade { get; set; } = new();
         public List<string> PresentesFuncao { get; set; } = new();
 
         public LocalRequest LocalTrabalho { get; set; } = new();

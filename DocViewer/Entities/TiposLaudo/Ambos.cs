@@ -43,7 +43,7 @@ namespace DocViewer.Entities.Ambos
 
         public override string ToString()
         {
-            return $"Número Perícia: {NumeroPericia}\nData Perícia: {DataPericia}\nData Laudo: {DataLaudo}\nAtividades: {Atividades}\nEndereço: {Endereco}\nReclamantes: {string.Join(", ", Reclamante)}\nReclamadas: {string.Join(", ", Reclamada)}\nDocumentos: {string.Join(", ", Documentos)}\nAnexos Insalubridade: {string.Join(", ", AnexosInsa)}\nAnexos Periculosidade: {string.Join(", ", AnexosPericu)}";
+            return $"Número Perícia: {NumeroPericia}\nNumero da Vara: {NumeroVara}\nData Perícia: {DataPericia}\nData Laudo: {DataLaudo}\nAtividades: {Atividades}\nEndereço: {Endereco}\nReclamantes: {string.Join(", ", Reclamante)}\nReclamadas: {string.Join(", ", Reclamada)}\nDocumentos: {string.Join(", ", Documentos)}\nAnexos Insalubridade: {string.Join(", ", AnexosInsa)}\nAnexos Periculosidade: {string.Join(", ", AnexosPericu)}";
         }
     }
 }

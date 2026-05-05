@@ -286,3 +286,22 @@ window.addEventListener('DOMContentLoaded', () => {
   adicionarDocumento('container-documentos-ambos');
 
 });
+// ==========================
+// UTIL
+// ==========================
+
+function formatarData(idCampo) {
+  const valor = document.getElementById(idCampo).value;
+  if (!valor) return "";
+
+  // aceita dd/MM/yyyy
+  if (valor.includes("/")) return valor;
+
+  // converte yyyy-MM-dd → dd/MM/yyyy
+  if (valor.includes("-")) {
+    const [ano, mes, dia] = valor.split("-");
+    return `${dia}/${mes}/${ano}`;
+  }
+
+  return valor;
+}

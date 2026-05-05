@@ -2,6 +2,8 @@ using System.Diagnostics;
 using DocViewer.Models.Requests;
 using DocViewer.Entities.Periculosidade;
 using DocViewer.Entities.Corpo;
+using DocViewer.Entities.Insalubridade;
+using DocViewer.Entities.Ambos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -91,6 +93,76 @@ app.MapPost("/api/laudo-pericu", (PericulosidadeRequest request) =>
     Console.WriteLine(periculo);
 
     return Results.Ok("Laudo gerado com sucesso!");
+});
+app.MapPost("/api/laudo-insalub", (InsalubridadeRequest request) =>
+{
+    if (string.IsNullOrEmpty(request.NumeroPericia))
+        return Results.BadRequest("NumeroPericia é obrigatório.");
+
+    if (request.LocalTrabalho == null || request.Endereco == null)
+        return Results.BadRequest("Dados incompletos.");
+
+    var insalub = new Insalubridade(
+        request.NumeroPericia,
+        request.DataPericia,
+        request.DataLaudo,
+        new LocalDeTrabalho(
+            request.LocalTrabalho.Local,
+            request.LocalTrabalho.Paredes,
+            request.LocalTrabalho.Pisos,
+            request.LocalTrabalho.Iluminacao,
+            request.LocalTrabalho.Ventilacao
+        ),
+        new Endereco(
+            request.Endereco.Rua,
+            request.Endereco.Numero,
+            request.Endereco.Cidade,
+            request.Endereco.Bairro
+        ),
+        request.Reclamantes,
+        request.Reclamadas,
+        request.Documentos,
+        request.Anexos,
+        request.PresentesFuncao // 👈 você adicionou agora
+    );
+
+    Console.WriteLine(insalub);
+
+    return Results.Ok("Laudo de insalubridade gerado!");
+});
+app.MapPost("/api/laudo-ambos", (AmbosRequest request) =>
+{
+    if (string.IsNullOrEmpty(request.NumeroPericia))
+        return Results.BadRequest("NumeroPericia é obrigatório.");
+
+    var ambos = new Ambos(
+        request.NumeroPericia,
+        request.DataPericia,
+        request.DataLaudo,
+        
+        new LocalDeTrabalho(
+            request.LocalTrabalho.Local,
+            request.LocalTrabalho.Paredes,
+            request.LocalTrabalho.Pisos,
+            request.LocalTrabalho.Iluminacao,
+            request.LocalTrabalho.Ventilacao
+        ),
+        new Endereco(
+            request.Endereco.Rua,
+            request.Endereco.Numero,
+            request.Endereco.Cidade,
+            request.Endereco.Bairro
+        ),
+        request.Reclamantes,
+        request.Reclamadas,
+        request.Documentos,
+        request.AnexosPericulosidade,
+        request.AnexosInsalubridade
+    );
+
+    Console.WriteLine(ambos);
+
+    return Results.Ok("Laudo (Ambos) gerado com sucesso!");
 });
 
 app.Run();

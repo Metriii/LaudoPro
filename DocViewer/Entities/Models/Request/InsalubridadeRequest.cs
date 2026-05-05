@@ -1,7 +1,8 @@
 using DocViewer.Models.Request;
+
 namespace DocViewer.Models.Requests
 {
-    public class PericulosidadeRequest
+    public class InsalubridadeRequest
     {
         public string NumeroPericia { get; set; } = "";
         public string Tipo { get; set; } = "";

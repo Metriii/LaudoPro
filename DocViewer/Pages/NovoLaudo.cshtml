@@ -369,8 +369,8 @@ async function enviarPericulosidade() {
     // 🔹 OBJETO FINAL
     const dados = {
         numeroPericia: document.getElementById("numero-processo-peric").value,
-        dataPericia: document.getElementById("data-pericia-peric").value,
-        dataLaudo: document.getElementById("data-laudo-peric").value,
+        dataPericia: formatarData("data-pericia-peric"),
+        dataLaudo: formatarData("data-laudo-peric"),
 
         reclamantes,
         reclamadas,
@@ -397,6 +397,244 @@ async function enviarPericulosidade() {
     console.log(dados);
 
     const response = await fetch("/api/laudo-pericu", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados)
+    });
+
+    const result = await response.text();
+    alert(result);
+}
+</script>
+
+<script>
+async function enviarInsalubridade() {
+
+    // 🔹 RECLAMANTES
+    const reclamantes = Array.from(
+        document.querySelectorAll("#lista-reclamantes-insalub input")
+    ).map(i => i.value.trim()).filter(v => v !== "");
+
+    // 🔹 RECLAMADAS
+    const reclamadas = Array.from(
+        document.querySelectorAll("#lista-reclamadas-insalub input")
+    ).map(i => i.value.trim()).filter(v => v !== "");
+
+    // 🔹 DOCUMENTOS (⚠️ AQUI É SELECT, NÃO INPUT)
+    const documentos = Array.from(
+        document.querySelectorAll("#container-documentos-insalub select")
+    ).map(s => s.value).filter(v => v !== "");
+
+    // 🔹 ANEXOS (⚠️ SELECT TAMBÉM)
+    const anexos = Array.from(
+        document.querySelectorAll("#container-insalub select")
+    ).map(s => s.value).filter(v => v !== "");
+
+    // 🔹 PRESENTES
+    const presentes = Array.from(
+        document.querySelectorAll("#lista-presentes-insalub .campo")
+    ).map(div => {
+        const nome = div.querySelector(".nome-presente").value.trim();
+        const funcao = div.querySelector(".funcao-presente").value.trim();
+        return nome && funcao ? `${nome} - ${funcao}` : null;
+    }).filter(v => v !== null);
+
+    // 🔴 VALIDAÇÃO
+    if (!document.getElementById("numero-processo-insalub").value.trim())
+        return alert("Preencha o número do processo");
+
+    if (reclamantes.length === 0)
+        return alert("Adicione pelo menos um reclamante");
+
+    if (reclamadas.length === 0)
+        return alert("Adicione pelo menos uma reclamada");
+
+    if (documentos.length === 0)
+        return alert("Adicione pelo menos um documento");
+
+    if (anexos.length === 0)
+        return alert("Adicione pelo menos um anexo");
+
+    if (presentes.length === 0)
+        return alert("Adicione pelo menos um presente");
+
+    if (!document.getElementById("rua-insalub").value.trim())
+        return alert("Preencha a rua");
+
+    if (!document.getElementById("numero-insalub").value.trim())
+        return alert("Preencha o número");
+
+    if (!document.getElementById("bairro-insalub").value.trim())
+        return alert("Preencha o bairro");
+
+    if (!document.getElementById("cidade-insalub").value.trim())
+        return alert("Preencha a cidade");
+
+    if (!document.getElementById("local-insalub").value.trim())
+        return alert("Preencha o local de trabalho");
+
+    if (!document.getElementById("data-pericia-insalub").value)
+        return alert("Preencha a data da perícia");
+
+    if (!document.getElementById("data-laudo-insalub").value)
+        return alert("Preencha a data do laudo");
+
+    // 🔹 OBJETO FINAL
+    const dados = {
+        numeroPericia: document.getElementById("numero-processo-insalub").value,
+        dataPericia: formatarData("data-pericia-insalub"),
+        dataLaudo: formatarData("data-laudo-insalub"),
+
+        reclamantes,
+        reclamadas,
+        documentos,
+        anexos,
+        presentesFuncao: presentes,
+
+        localTrabalho: {
+            local: document.getElementById("local-insalub").value,
+            paredes: document.getElementById("paredes-insalub").value,
+            pisos: document.getElementById("pisos-insalub").value,
+            iluminacao: document.getElementById("iluminacao-insalub").value,
+            ventilacao: document.getElementById("ventilacao-insalub").value
+        },
+
+        endereco: {
+            rua: document.getElementById("rua-insalub").value,
+            numero: document.getElementById("numero-insalub").value,
+            bairro: document.getElementById("bairro-insalub").value,
+            cidade: document.getElementById("cidade-insalub").value
+        }
+    };
+
+    console.log(dados);
+
+    const response = await fetch("/api/laudo-insalub", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados)
+    });
+
+    const result = await response.text();
+    alert(result);
+}
+</script>
+<script>
+async function enviarambos() {
+
+    // 🔹 RECLAMANTES
+    const reclamantes = Array.from(
+        document.querySelectorAll("#lista-reclamantes-ambos input")
+    ).map(i => i.value.trim()).filter(v => v !== "");
+
+    // 🔹 RECLAMADAS
+    const reclamadas = Array.from(
+        document.querySelectorAll("#lista-reclamadas-ambos input")
+    ).map(i => i.value.trim()).filter(v => v !== "");
+
+    // 🔹 DOCUMENTOS (SELECT)
+    const documentos = Array.from(
+        document.querySelectorAll("#container-documentos-ambos select")
+    ).map(s => s.value).filter(v => v !== "");
+
+    // 🔹 ANEXOS PERICULOSIDADE (SELECT)
+    const anexosPericu = Array.from(
+        document.querySelectorAll("#container-ambos-peric select")
+    ).map(s => s.value).filter(v => v !== "");
+
+    // 🔹 ANEXOS INSALUBRIDADE (SELECT)
+    const anexosInsalub = Array.from(
+        document.querySelectorAll("#container-ambos-insalub select")
+    ).map(s => s.value).filter(v => v !== "");
+
+    // 🔹 PRESENTES
+    const presentes = Array.from(
+        document.querySelectorAll("#lista-presentes-ambos .campo")
+    ).map(div => {
+        const nome = div.querySelector(".nome-presente").value.trim();
+        const funcao = div.querySelector(".funcao-presente").value.trim();
+        return nome && funcao ? `${nome} - ${funcao}` : null;
+    }).filter(v => v !== null);
+
+    // 🔴 VALIDAÇÃO
+    if (!document.getElementById("numero-processo-ambos").value.trim())
+        return alert("Preencha o número do processo");
+
+    if (reclamantes.length === 0)
+        return alert("Adicione pelo menos um reclamante");
+
+    if (reclamadas.length === 0)
+        return alert("Adicione pelo menos uma reclamada");
+
+    if (documentos.length === 0)
+        return alert("Adicione pelo menos um documento");
+
+    if (anexosPericu.length === 0)
+        return alert("Adicione pelo menos um anexo de periculosidade");
+
+    if (anexosInsalub.length === 0)
+        return alert("Adicione pelo menos um anexo de insalubridade");
+
+    if (presentes.length === 0)
+        return alert("Adicione pelo menos um presente");
+
+    if (!document.getElementById("rua-ambos").value.trim())
+        return alert("Preencha a rua");
+
+    if (!document.getElementById("numero-ambos").value.trim())
+        return alert("Preencha o número");
+
+    if (!document.getElementById("bairro-ambos").value.trim())
+        return alert("Preencha o bairro");
+
+    if (!document.getElementById("cidade-ambos").value.trim())
+        return alert("Preencha a cidade");
+
+    if (!document.getElementById("local-ambos").value.trim())
+        return alert("Preencha o local de trabalho");
+
+    if (!document.getElementById("data-pericia-ambos").value)
+        return alert("Preencha a data da perícia");
+
+    if (!document.getElementById("data-laudo-ambos").value)
+        return alert("Preencha a data do laudo");
+
+    // 🔹 OBJETO FINAL
+    const dados = {
+        numeroPericia: document.getElementById("numero-processo-ambos").value,
+        dataPericia: document.getElementById("data-pericia-ambos").value,
+        dataLaudo: document.getElementById("data-laudo-ambos").value,
+
+        reclamantes,
+        reclamadas,
+        documentos,
+        anexosPericulosidade: anexosPericu,
+        anexosInsalubridade: anexosInsalub,
+        presentesFuncao: presentes,
+
+        localTrabalho: {
+            local: document.getElementById("local-ambos").value,
+            paredes: document.getElementById("paredes-ambos").value,
+            pisos: document.getElementById("pisos-ambos").value,
+            iluminacao: document.getElementById("iluminacao-ambos").value,
+            ventilacao: document.getElementById("ventilacao-ambos").value
+        },
+
+        endereco: {
+            rua: document.getElementById("rua-ambos").value,
+            numero: document.getElementById("numero-ambos").value,
+            bairro: document.getElementById("bairro-ambos").value,
+            cidade: document.getElementById("cidade-ambos").value
+        }
+    };
+
+    console.log("AMBOS:", dados);
+
+    const response = await fetch("/api/laudo-ambos", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
